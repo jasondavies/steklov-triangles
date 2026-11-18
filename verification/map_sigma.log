@@ -1,0 +1,7 @@
+$ python map_sigma.py
+max sigma1 L on grid: {'p': 0.5, 'q': 0.8660254037844386, 'sL': 3.8724615957727817, 's2L': 3.8724615957728092, 'sA': 0.8494076787255161}
+max sigma1 sqrt(A): {'p': 0.5, 'q': 0.8660254037844386, 'sL': 3.8724615957727817, 's2L': 3.8724615957728092, 'sA': 0.8494076787255161}
+equilateral sigma1 L = 3.872461595773, sigma1 sqrt(A) = 0.849407678726
+MAP: ALL PASS (grid maximum at the equilateral apex, all other grid values smaller)
+
+[gate] ok   map_sigma_summary.json reports ok

@@ -1,0 +1,14 @@
+$ python test_independent.py
+(1) cos(pi x) bound: max rel. difference formula vs quadrature = 9.143923464424088e-15
+||r|| <= [2.4565180041653813800661174292696721e-13 +/- 4.15e-48]  eps_L2(bdry) <= [2.7008271412666180645319833626764863e-13 +/- 1.31e-48]  eps_energy <= [4.0063048549180299322714588200034274e-13 +/- 4.01e-48]
+Gram of (u1,u2) on dE: [[[1.5774419328840518305790178675190114 +/- 4.99e-35], [3.5735028264997540242249590731556269e-36 +/- 3.95e-71]], [[3.5735028264997540242249590731556269e-36 +/- 3.95e-71], [1.5774419328840518305790178675190115 +/- 4.72e-35]]]
+sum_e m^e: [[+/- 2.78e-34], [+/- 2.44e-34]]
+  rho=0.10 psi=4.0: direct 3.535821335187  formula 3.535821335187
+  rho=0.30 psi=3.8: direct 3.003724050768  formula 3.003724050768
+  rho=0.55 psi=4.5: direct 2.658837475364  formula 2.658837475364
+  rho=0.60 psi=0.3: direct 2.738056345403  formula 2.738056345403
+  rho=0.45 psi=2.0: direct 2.949568447264  formula 2.949568447264
+(2) transplant bound: max rel. difference = 2.3092638912203256e-14
+TEST_INDEPENDENT: ALL PASS
+
+[gate] ok   test_independent.json reports ok

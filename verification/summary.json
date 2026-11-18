@@ -1,0 +1,575 @@
+{
+ "time_utc": "2026-11-19T00:08:04Z",
+ "only": null,
+ "skip_numerics": false,
+ "python": "3.12.3",
+ "python_flint": "0.9.0",
+ "numpy": "2.5.5",
+ "scipy": "1.18.1",
+ "mpmath": "1.4.1",
+ "openblas_coretype": null,
+ "mathlib_override": true,
+ "results": [
+  {
+   "name": "equilateral",
+   "ok": true,
+   "seconds": 0.1,
+   "cmd": [
+    "python",
+    "equilateral.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "Sigma(E) lower endpoint >= 3.8724615957722"
+    },
+    {
+     "ok": true,
+     "check": "Sigma(E) upper endpoint <= 3.8724615957734"
+    },
+    {
+     "ok": true,
+     "check": "sigma_1 sqrt|E| lower endpoint >= 0.8494076787253"
+    },
+    {
+     "ok": true,
+     "check": "sigma_1 sqrt|E| upper endpoint <= 0.8494076787257"
+    },
+    {
+     "ok": true,
+     "check": "residual eta <= 1.9559e-13"
+    },
+    {
+     "ok": true,
+     "check": "sigma~ = 1.290820531924 to 12 digits"
+    }
+   ]
+  },
+  {
+   "name": "cr_lower",
+   "ok": true,
+   "seconds": 0.9,
+   "cmd": [
+    "python",
+    "cr_lower.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "inertia certificate valid, O nonsingular, <= 2 boundary edges per cell"
+    },
+    {
+     "ok": true,
+     "check": "n_h = 16, 408 dofs"
+    },
+    {
+     "ok": true,
+     "check": "exactly 3 negative eigenvalues of S_h - 3 B_h"
+    },
+    {
+     "ok": true,
+     "check": "sigma_3(E) >= 2.2003"
+    },
+    {
+     "ok": true,
+     "check": "C_h^2 = 0.121137..."
+    }
+   ]
+  },
+  {
+   "name": "local",
+   "ok": true,
+   "seconds": 0.1,
+   "cmd": [
+    "python",
+    "local.py",
+    "0.6",
+    "64"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "every local box passes"
+    },
+    {
+     "ok": true,
+     "check": "460 local boxes"
+    },
+    {
+     "ok": true,
+     "check": "rho1 = double(0.6)"
+    },
+    {
+     "ok": true,
+     "check": "psi range [0, 6.3]"
+    },
+    {
+     "ok": true,
+     "check": "eps_bdry <= 2.71e-13"
+    },
+    {
+     "ok": true,
+     "check": "eps_grad <= 4.01e-13"
+    },
+    {
+     "ok": true,
+     "check": "Gram of u_1 = 1.577442"
+    },
+    {
+     "ok": true,
+     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=0.0)"
+    },
+    {
+     "ok": true,
+     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=0.0)"
+    },
+    {
+     "ok": true,
+     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=0.7)"
+    },
+    {
+     "ok": true,
+     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=0.7)"
+    },
+    {
+     "ok": true,
+     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=1.9)"
+    },
+    {
+     "ok": true,
+     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=1.9)"
+    },
+    {
+     "ok": true,
+     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=4.0)"
+    },
+    {
+     "ok": true,
+     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=4.0)"
+    }
+   ]
+  },
+  {
+   "name": "far_region",
+   "ok": true,
+   "seconds": 0.1,
+   "cmd": [
+    "python",
+    "far_region.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "every far interval passes and the intervals tile [0,1/2]"
+    },
+    {
+     "ok": true,
+     "check": "16 intervals"
+    },
+    {
+     "ok": true,
+     "check": "same rho1 as the local region"
+    },
+    {
+     "ok": true,
+     "check": "far-region maximum <= 3.12"
+    },
+    {
+     "ok": true,
+     "check": "far-region maximum = 3.1144 (4 decimals)"
+    },
+    {
+     "ok": true,
+     "check": "far bound < lower bound of Sigma(E)"
+    }
+   ]
+  },
+  {
+   "name": "coverage_check",
+   "ok": true,
+   "seconds": 0.1,
+   "cmd": [
+    "python",
+    "coverage_check.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "local boxes tile the disc"
+    },
+    {
+     "ok": true,
+     "check": "all 460 local boxes re-certified"
+    },
+    {
+     "ok": true,
+     "check": "same rho1"
+    }
+   ]
+  },
+  {
+   "name": "test_moments",
+   "ok": true,
+   "seconds": 0.2,
+   "cmd": [
+    "python",
+    "test_moments.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "test_moments.json reports ok"
+    }
+   ]
+  },
+  {
+   "name": "test_independent",
+   "ok": true,
+   "seconds": 0.3,
+   "cmd": [
+    "python",
+    "test_independent.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "test_independent.json reports ok"
+    }
+   ]
+  },
+  {
+   "name": "check_local_vs_ritz",
+   "ok": true,
+   "seconds": 0.3,
+   "cmd": [
+    "python",
+    "check_local_vs_ritz.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "check_local_vs_ritz.json reports ok"
+    }
+   ]
+  },
+  {
+   "name": "table_bounds",
+   "ok": true,
+   "seconds": 0.2,
+   "cmd": [
+    "python",
+    "table_bounds.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "60-60-60: certified upper bound <= printed 3.8724615957729"
+    },
+    {
+     "ok": true,
+     "check": "60-60-60: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "60-60-60: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "60-60-60: printed 3.8724615957728 +- 1e-13 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "50-50-80: certified upper bound <= printed 2.8777309857377"
+    },
+    {
+     "ok": true,
+     "check": "50-50-80: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "50-50-80: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "50-50-80: printed 2.87773098574 +- 3e-11 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "70-70-40: certified upper bound <= printed 2.5730765728918"
+    },
+    {
+     "ok": true,
+     "check": "70-70-40: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "70-70-40: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "70-70-40: printed 2.573076572892 +- 2e-12 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "40-60-80: certified upper bound <= printed 2.5350358150935"
+    },
+    {
+     "ok": true,
+     "check": "40-60-80: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "40-60-80: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "40-60-80: printed 2.53503581509 +- 2e-11 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "45-45-90: certified upper bound <= printed 2.4960723700476"
+    },
+    {
+     "ok": true,
+     "check": "45-45-90: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "45-45-90: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "45-45-90: printed 2.4960723700475 +- 1e-13 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "30-60-90: certified upper bound <= printed 1.9013817577256"
+    },
+    {
+     "ok": true,
+     "check": "30-60-90: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "30-60-90: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "30-60-90: printed 1.9013817577255 +- 1e-13 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "30-30-120: certified upper bound <= printed 1.5603440800120"
+    },
+    {
+     "ok": true,
+     "check": "30-30-120: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "30-30-120: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "30-30-120: printed 1.5603441 +- 3e-7 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "regular 4-gon: certified upper bound <= printed 5.5060219386902"
+    },
+    {
+     "ok": true,
+     "check": "regular 4-gon: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "regular 4-gon: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "regular 4-gon: printed 5.5060219386901 +- 1e-13 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "regular 5-gon: certified upper bound <= printed 5.9774725550439"
+    },
+    {
+     "ok": true,
+     "check": "regular 5-gon: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "regular 5-gon: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "regular 5-gon: printed 5.9774726 +- 4e-7 contains the estimate +- its estimated error"
+    },
+    {
+     "ok": true,
+     "check": "regular 6-gon: certified upper bound <= printed 6.1355701455936"
+    },
+    {
+     "ok": true,
+     "check": "regular 6-gon: estimate (minus its error) <= certified upper bound"
+    },
+    {
+     "ok": true,
+     "check": "regular 6-gon: all 100 directions retained; variance Gram well conditioned at 80 digits"
+    },
+    {
+     "ok": true,
+     "check": "regular 6-gon: printed 6.135570 +- 5e-6 contains the estimate +- its estimated error"
+    }
+   ]
+  },
+  {
+   "name": "numerics_extra",
+   "ok": true,
+   "seconds": 18.1,
+   "cmd": [
+    "python",
+    "numerics_extra.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "numerics_extra reports ok"
+    },
+    {
+     "ok": true,
+     "check": "CR discrete sigma_{h,1} = 1.28042, 1.28790"
+    },
+    {
+     "ok": true,
+     "check": "theta(0) = 1.83525"
+    },
+    {
+     "ok": true,
+     "check": "theta(0.05), theta(0.25), theta(1/2)"
+    },
+    {
+     "ok": true,
+     "check": "thin-triangle agreement <= 4e-4"
+    }
+   ]
+  },
+  {
+   "name": "map_sigma",
+   "ok": true,
+   "seconds": 0.8,
+   "cmd": [
+    "python",
+    "map_sigma.py"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "map_sigma_summary.json reports ok"
+    }
+   ]
+  },
+  {
+   "name": "claims_tex",
+   "ok": true,
+   "seconds": 0.0,
+   "cmd": [
+    "python",
+    "scripts/make_claims_tex.py",
+    "--check"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "paper/claims.tex is in sync with claims.json"
+    },
+    {
+     "ok": true,
+     "check": "the literal enclosure in the abstract matches claims.json"
+    }
+   ]
+  },
+  {
+   "name": "paper",
+   "ok": true,
+   "seconds": 0.6,
+   "cmd": [
+    "latexmk",
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-gg",
+    "steklov-triangles.tex"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "latexmk succeeded"
+    }
+   ]
+  },
+  {
+   "name": "lean",
+   "ok": true,
+   "seconds": 23.6,
+   "cmd": [
+    "bash",
+    "scripts/build_with_lean_path.sh"
+   ],
+   "gates": [
+    {
+     "ok": true,
+     "check": "no errors, no sorry"
+    },
+    {
+     "ok": true,
+     "check": "only the standard axioms (14 theorems)"
+    }
+   ]
+  },
+  {
+   "name": "paper_log_clean",
+   "ok": true,
+   "issues": 0
+  }
+ ],
+ "inputs_sha256": {
+  "CITATION.cff": "305f56e414c1d72ab68675d86a7304b68c57eb8cbf5ce0e0470d632c39c9fcd9",
+  "README.md": "be92c2aaec26a362fe050968fec297b90db14133a6f877126ed9426a5c49286a",
+  "claims.json": "f72d1f031927a8dbf7587a7efcb3a2a0193634e26756e73b38bc129679e8ec29",
+  "code/README.md": "d1ae9c6219c497485cbaeb7cd817f850ba0dc58c6386b8ab7474df7fc0ce24dc",
+  "code/check_local_vs_ritz.py": "05091936116c6af3ccc16d61c4f631f9a8b641b1b563572a1fe9727b449a27d7",
+  "code/coverage_check.py": "d49960fd7785cbc7ba8fdb452cc9b8be7ec97bd0883860fcd93156c6126a969f",
+  "code/cr_lower.py": "d9c5b98cbf68e2011b5878d1a2428a98ba14a93e24c5d89a8632978a1940c76c",
+  "code/equilateral.py": "795a45799df45f6c0100d62514a8d2a0bee25f2e7438cf77b710ece86fde2164",
+  "code/far_region.py": "bc9e72bacde7aa165528b1c8f349113edb4cbc097d11c058e3fa91a08c4cfb51",
+  "code/hp_table.py": "453fb2130035c195a4a72cba26f8cb96a32bfb0e432bbc35ff6ca2e8eea5aff9",
+  "code/hritz.py": "19080bbfb1538ccafd6ab68cc60c37c20dc8a8012629a15697cdcda46c7900b7",
+  "code/local.py": "ef8067725d5e0d0997354d4fe27d7e60c7b3310940ee56b19c8c6e0804f3ac4a",
+  "code/make_certificate.py": "6c510f7788658696393e4c208b4728c28880ff662230003da2baf017764d32b7",
+  "code/map_sigma.py": "f68b42d64f4531c4492ac4c61ef31931f6a01f51a912c90793c33bda1ba2ebef",
+  "code/numerics_extra.py": "7f891ff9014774ff39303d477f55a37e6d49d73dc7158e4dec4fc0d4af7eb879",
+  "code/rig.py": "e9739757b8fe647bebcfc05d797f0c2585ee171aea73b2bb64b72b89bb03849d",
+  "code/table_bounds.py": "81e4cb6dda2aa71cbfca3898c283e87d47b5fd29bdc26f47b8248b60dcbb7a69",
+  "code/test_independent.py": "28d7819711c228a595ea5c5a7894d365b905156e344439ed67e0dfe3677dc85f",
+  "code/test_moments.py": "4172cbf21557c52a1461c29fab5aa446e601da0e01761f5a1795ae3ac90cc859",
+  "data/cr_congruence.npz": "46ff3e3c5ea0a965d48bdab42854325f2cef0e348996f1ea22f174805f632f15",
+  "data/equilateral_pair.json": "34538ff437a93a77d584a8daad7bf2713dfa950aba4514d38f59f28e4bdd4d8c",
+  "data/table_estimates.json": "70d1feb8967a7da15129da4c83c706008e1019ff13403b28172e3ce8ecf6e8cd",
+  "lean/README.md": "0bcda59ca34376d96350edaeee4644c28347e340ec013a9ad7ef4c2eb0a5d6f6",
+  "lean/SteklovTriangles/AreaCorollary.lean": "72a504e755d976a306ae7820c9d7d077ee21530284c7e87e5002b23e39d30cc4",
+  "lean/SteklovTriangles/CosBound.lean": "29243a67f33d2d095e56316e59b5acb0bc2f28efe301a0706e4e0f484f7797aa",
+  "lean/SteklovTriangles/Reformulation.lean": "12efa174be9a86c910203231202487ea9188f613ee3a67d3899061ba609323f4",
+  "lean/SteklovTriangles.lean": "85a2abba5d1cc08d56f2478f93d234f6996d51c3ad88b56df961793a7d5a4f64",
+  "lean/lakefile.toml": "9beb3495e482a038a65b32b687680da0a873230062d0bb63133651fe9257c6d9",
+  "lean/scripts/build_with_lean_path.sh": "2a797dce930952fa41709027bbf55fb2d57815883c4c0f97c68951f22d7ad7ea",
+  "lean/scripts/print_axioms.lean": "14e86a773ad0d1c75945b8397ce53b3dfb6ae7c816cf88494453ad1d953673bf",
+  "paper/claims.tex": "faeb3be716fe7c59d8a61686ef46d4d6b39cb1af057578cd609dc4534ba6e402",
+  "paper/steklov-triangles.tex": "8705b8a4bf831bd839cf7190b671060d3d2f901455b3fe62126b0a9d09345c18",
+  "requirements.txt": "f8161f59ef65164615c3fc60ccb0d922ff97927dc23bbe4317f65995f98d6751",
+  "scripts/make_claims_tex.py": "cfec4a11db7dd07ea41c109c67c656f36f7502fd1a82be7ebd74e99fea67d78c",
+  "scripts/verify.py": "f9e48b60d1444193fb5cf313cfe8d3ac4055a278b46e916e6358dbb09a0526dc"
+ },
+ "pdf_sha256": "5320bc76a07d39b7b15013177f0bc23797d08f50b454432b13466dedb254a3cc",
+ "overall": "PASS"
+}

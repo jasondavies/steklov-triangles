@@ -1,0 +1,5 @@
+$ python scripts/make_claims_tex.py --check
+claims.tex in sync with claims.json: True
+
+[gate] ok   paper/claims.tex is in sync with claims.json
+[gate] ok   the literal enclosure in the abstract matches claims.json

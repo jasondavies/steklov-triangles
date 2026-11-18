@@ -1,0 +1,22 @@
+$ bash scripts/build_with_lean_path.sh
+== SteklovTriangles.AreaCorollary
+== SteklovTriangles.Reformulation
+== SteklovTriangles.CosBound
+== axioms
+'SteklovTriangles.amgm3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.triangle_isoperimetric_heron' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.amgm3_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.triangle_isoperimetric_heron_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.area_corollary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.area_corollary_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.G_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.X_eq_rho_Y' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.stretch_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.stretch_sq1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.stretch_sq2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.int_x_sin_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.int_cos_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SteklovTriangles.int_cos' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+[gate] ok   no errors, no sorry
+[gate] ok   only the standard axioms (14 theorems)

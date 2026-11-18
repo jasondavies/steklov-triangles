@@ -1,0 +1,9 @@
+{
+ "ok": true,
+ "leaves": 460,
+ "overlaps": 0,
+ "exact_area_sum": true,
+ "psi_max_gt_2pi": true,
+ "rho1": "0x1.3333333333333p-1",
+ "psi_max": "0x1.9333333333333p+2"
+}

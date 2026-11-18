@@ -1,0 +1,650 @@
+\pdfoutput=1
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\input{claims}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+
+\emergencystretch=3em
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\Lam}{\Lambda}
+\DeclareMathOperator{\tr}{tr}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\sinc}{sinc}
+
+\title{The equilateral triangle maximises the first Steklov eigenvalue among triangles}
+\author{Jason Davies\thanks{\href{mailto:jason@jasondavies.com}{\nolinkurl{jason@jasondavies.com}}}}
+\date{November 18, 2026}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+Let $\sigma_1(T)$ be the first nonzero Steklov eigenvalue of a triangle $T$ and $L(T)$ its perimeter.
+We prove that $\sigma_1(T)L(T)\le\sigma_1(E)L(E)$, with equality only for the equilateral triangle $E$.
+Since $|T|/L(T)^2$ is also maximal at $E$, the equilateral triangle uniquely maximises
+$\sigma_1\sqrt{|T|}$ as well. This settles the case $n=3$ of the Steklov analogue of the P\'olya--Szeg\H{o}
+conjecture for $n$-gons, for both normalisations. We also prove that
+$3.8724615957722\le \sigma_1(E)L(E)\le 3.8724615957734$ and that $\sigma_1(E)$ is a double eigenvalue.
+
+The proof is computer-assisted. Near $E$ we transplant the first eigenspace of $E$ affinely; away from $E$
+the trial function $\cos(\pi x)$ suffices. All inequalities are verified in ball arithmetic.
+\end{abstract}
+
+\noindent\textbf{AI transparency statement.} The main result, its
+computer-assisted proof, the partial Lean formalisation and the manuscript
+were produced by artificial intelligence. The human author initiated the
+broader research and directed the AI systems, but did not write the text
+and has not checked the arguments.
+Details are given at the end of the paper.
+
+\section{Introduction}
+
+For a bounded Lipschitz domain $\Omega\subset\R^2$, the Steklov problem
+$\Delta u=0$ in $\Omega$, $\partial_\nu u=\sigma u$ on $\partial\Omega$
+has eigenvalues $0=\sigma_0<\sigma_1(\Omega)\le\sigma_2(\Omega)\le\cdots$. They satisfy
+\begin{equation}\label{eq:var}
+\sigma_1(\Omega)=\min_{u\in H^1(\Omega)\setminus\R}\mathcal R_\Omega(u),\qquad
+\mathcal R_\Omega(u)=\frac{\int_\Omega|\nabla u|^2}{\int_{\partial\Omega}u^2-\frac1{|\partial\Omega|}\bigl(\int_{\partial\Omega}u\bigr)^2}.
+\end{equation}
+The scale-invariant quantity is
+\[\Sigma(\Omega):=\sigma_1(\Omega)\,L(\Omega),\qquad L(\Omega)=|\partial\Omega|.\]
+Weinstock's inequality~\cite{Weinstock} states that $\Sigma(\Omega)\le2\pi$ for simply connected planar
+domains, with equality only for the disk; see the survey~\cite{GP}. For polygons with a prescribed number of
+sides, the natural conjecture is the analogue of P\'olya--Szeg\H{o}'s conjecture for the Dirichlet Laplacian:
+
+\medskip\noindent\textbf{Problem} (Oudet; AIM problem list \emph{Steklov eigenproblems}, Problem 4.6~\cite{AimPL}).
+\emph{Do regular $n$-gons maximise $\sigma_1$ among $n$-gons of given area, or of given perimeter?}
+
+\medskip
+Dominguez, Nigam and Shahriari~\cite{DNS} gave numerical evidence for triangles using finite elements and
+Bayesian optimisation. Among rectangles of given perimeter or area, the square maximises $\sigma_1$:
+this is the planar case of the cuboid inequality of Girouard, Lagac\'e, Polterovich and
+Savo~\cite[Thm.~1.6]{GLPS}. Cheng, Gui, Hu, Li and Yao~\cite{CGHLY} state the conjecture for convex polygons
+with at most $N$ sides at fixed perimeter (their Conjecture~1.1), and leave it open for every $N\ge3$. They
+prove that $\sigma_1$ of the perimeter-normalised regular $N$-gon increases strictly with $N$, and that its
+first eigenspace is two-dimensional. Dryden, Gordon, Moreno, Rowlett and Villegas-Blas~\cite{DGMRV} prove
+$\sigma_k(T)L(T)\le\frac{8\sqrt3}{3}\pi^2k^2\vartheta(T)$ for triangles, where $\vartheta(T)$ is the smallest
+angle. This shows that degenerate triangles are far from optimal, but it does not compare triangles with $E$.
+
+For the Neumann problem, Laugesen and Siudeja~\cite{LS} proved that the equilateral triangle maximises
+the first nonzero Neumann eigenvalue times $L^2$ among triangles, and hence times the area. Near the
+equilateral triangle their trial functions are the eigenfunctions of the equilateral triangle, transplanted
+by the linear map onto the given triangle. This affine transplantation is the precedent for our local
+argument. The Steklov problem adds two difficulties: the first eigenvalue of $E$ is double, so the maximum
+is a cone and the comparison degenerates at $E$; and a rigorous lower bound for $\sigma_1(E)$ is needed. We are
+not aware of a proof of the Steklov case for any $n\ge3$.
+
+\begin{theorem}\label{thm:main}
+Let $E$ be an equilateral triangle. For every triangle $T$,
+\[\Sigma(T)\le\Sigma(E),\]
+with equality if and only if $T$ is equilateral. Moreover $\sigma_1(E)=\sigma_2(E)<\sigma_3(E)$ and
+\[\clSigmaElo\le\Sigma(E)\le\clSigmaEhi .\]
+\end{theorem}
+
+The double eigenvalue agrees with~\cite[Thm.~1.2]{CGHLY} for $N=3$.
+
+\begin{corollary}\label{cor:area}
+For every triangle $T$,
+\[\sigma_1(T)\sqrt{|T|}\le\sigma_1(E)\sqrt{|E|}\in[\clareaElo,\,\clareaEhi],\]
+with equality if and only if $T$ is equilateral.
+\end{corollary}
+
+\begin{proof}
+$\sigma_1\sqrt{|T|}=\Sigma(T)\,(|T|/L^2)^{1/2}$. By Heron's formula and the AM--GM inequality,
+$|T|/L^2\le\sqrt3/36$, with equality only for equilateral triangles. Now apply Theorem~\ref{thm:main}.
+\end{proof}
+
+\subsection*{Method}
+Upper bounds for $\sigma_1(T)$ come directly from~\eqref{eq:var}; a lower bound is needed only for the
+single domain $E$. We parametrise triangles by the apex $(p,q)$ over the base $[0,1]$
+(Lemma~\ref{lem:param}), and let $\rho$ be the distance of $(p,q)$ from the equilateral apex.
+\begin{enumerate}
+\item \emph{Near $E$} ($\rho\le0.6$). The trial space is the exact first eigenspace of $E$, transplanted by
+the affine map $E\to T$. The comparison involves only a few moments of the eigenspace and two exact
+identities. These identities let us divide out the factor $\rho$ (Lemma~\ref{lem:XrhoY}), which turns the
+degenerate comparison at $\rho=0$ into a sign condition. We check the sign condition on boxes in ball
+arithmetic. The moments are enclosed using a harmonic-polynomial approximation, a residual bound for the
+Dirichlet-to-Neumann map, and a Crouzeix--Raviart lower bound for $\sigma_3(E)$.
+\item \emph{Away from $E$} ($\rho\ge0.6$). The single trial function $\cos(\pi x)$ gives
+$\Sigma(T)\le\clfarBound$, well below $\Sigma(E)>3.8724$. A one-dimensional check on $\clfarIntervals$ intervals suffices.
+\end{enumerate}
+
+\section{Preliminaries}
+
+\subsection{The Dirichlet-to-Neumann map}
+Let $\Omega$ be a bounded Lipschitz domain. The Dirichlet-to-Neumann map $\Lam$ is the self-adjoint
+operator on $L^2(\partial\Omega)$ associated with the closed form $f\mapsto\int_\Omega|\nabla\mathcal Hf|^2$ on
+$H^{1/2}(\partial\Omega)$, where $\mathcal Hf$ is the harmonic extension. It has compact resolvent and eigenvalues
+$\sigma_k$, with an orthonormal basis of eigenvectors $\chi_k$ of $L^2(\partial\Omega)$; $\chi_0$ is
+constant. If $u$ is a harmonic polynomial with trace $f$, Green's formula gives $f\in\operatorname{dom}\Lam$ and
+$\Lam f=\partial_\nu u$. For $\tilde\sigma\in\R$ and $\eta>0$ write $J=[\tilde\sigma-\eta,\tilde\sigma+\eta]$.
+
+\begin{lemma}[Inclusion]\label{lem:incl}
+Let $W\subset\operatorname{dom}\Lam$ have dimension $k$, and suppose $\|(\Lam-\tilde\sigma)f\|\le\eta\|f\|$ for all
+$f\in W$. Then $\Lam$ has at least $k$ eigenvalues, counted with multiplicity, in $J$.
+\end{lemma}
+\begin{proof}
+Suppose not. Then some $f\in W\setminus0$ is orthogonal to the spectral subspace of $J$, and
+$\|(\Lam-\tilde\sigma)f\|^2=\sum_{|\sigma_j-\tilde\sigma|>\eta}|\sigma_j-\tilde\sigma|^2|\langle f,\chi_j\rangle|^2>\eta^2\|f\|^2$,
+a contradiction.
+\end{proof}
+
+\begin{lemma}[Eigenvector enclosure; cf.~\cite{DK}]\label{lem:enclosure}
+Let $P$ be the spectral projection of $\Lam$ onto $J$. Suppose every eigenvalue of $\Lam$ outside $J$ is
+either $0$ or at least $\sigma^{\rm lo}>\tilde\sigma\ge0$, and put $\gamma=\sigma^{\rm lo}-\tilde\sigma$. Let
+$f\in\operatorname{dom}\Lam$ be orthogonal to the constants, and $r=(\Lam-\tilde\sigma)f$. Then
+\[\|(I-P)f\|_{L^2(\partial\Omega)}\le\frac{\|r\|}{\gamma},\qquad
+\int_\Omega\bigl|\nabla\mathcal H(I-P)f\bigr|^2\le\frac{\sigma^{\rm lo}}{\gamma^2}\|r\|^2.\]
+\end{lemma}
+\begin{proof}
+$(\sigma_j-\tilde\sigma)\langle f,\chi_j\rangle=\langle r,\chi_j\rangle$ for every $j$, and the component along
+$\chi_0$ vanishes. The remaining $j$ with $\sigma_j\notin J$ have $\sigma_j\ge\sigma^{\rm lo}$, so
+$\|(I-P)f\|^2\le\|r\|^2/\gamma^2$, and
+$\int|\nabla\mathcal H(I-P)f|^2=\sum\sigma_j|\langle r,\chi_j\rangle|^2/(\sigma_j-\tilde\sigma)^2\le\sigma^{\rm lo}\|r\|^2/\gamma^2$,
+because $\sigma/(\sigma-\tilde\sigma)^2$ is decreasing for $\sigma>\tilde\sigma$ when $\tilde\sigma\ge0$ (its derivative is $-(\sigma+\tilde\sigma)/(\sigma-\tilde\sigma)^3$).
+\end{proof}
+
+\subsection{Parametrisation}
+For $(p,q)$ with $q>0$, write
+\[T(p,q)=\operatorname{conv}\{(0,0),(1,0),(p,q)\},\]
+and set
+\[F=\{(p,q):0<p\le\tfrac12,\ q>0,\ (1-p)^2+q^2\le1\}.\]
+Since $\Sigma$ is invariant under similarities, it suffices to treat the triangles $T(p,q)$, $(p,q)\in F$.
+
+\begin{lemma}\label{lem:param}
+Every triangle is similar to $T(p,q)$ for some $(p,q)\in F$, and $T(p,q)$ is equilateral if and only if
+$(p,q)=(\frac12,\frac{\sqrt3}{2})$.
+\end{lemma}
+\begin{proof}
+Rescale so that a longest side has length $1$. Move it to $[0,1]\times\{0\}$ with the third vertex
+$(p,q)$ in the upper half-plane, and reflect in $x=\frac12$ if necessary so that $p\le\frac12$. The side
+from $(1,0)$ to the apex is not longer than the base, so $(1-p)^2+q^2\le1$; this forces $p>0$. The other
+side then satisfies $p^2+q^2\le(1-p)^2+q^2\le1$. The equilateral case is clear.
+\end{proof}
+
+We write $p=\frac12+\rho\cos\psi$, $q=\frac{\sqrt3}2+\rho\sin\psi$ for polar coordinates about the
+equilateral apex; $\rho$ is the Euclidean distance in the $(p,q)$-plane.
+
+\subsection{Affine transplantation}
+Let $A\in GL_2^+(\R)$, $u\in H^1(\Omega)$ and $u_A=u\circ A^{-1}\in H^1(A\Omega)$. Write $G=A^{-1}A^{-T}$. For
+an edge $e$ of a polygon $\Omega$ with unit tangent $\tau_e$, put $s_e=|A\tau_e|$. Changing variables gives
+\begin{equation}\label{eq:transplant}
+\begin{gathered}
+\int_{A\Omega}|\nabla u_A|^2=\det A\sum_{i,j}G_{ij}\int_\Omega\partial_iu\,\partial_ju,\\
+\int_{Ae}u_A^2=s_e\int_eu^2,\qquad \int_{Ae}u_A=s_e\int_eu,
+\end{gathered}
+\end{equation}
+because the arc length on $Ae$ is $s_e$ times that on $e$. For a finite-dimensional space $\mathcal V$ of trial
+functions, define the forms
+$\mathcal N_A(u,u')=\int\nabla u_A\cdot\nabla u'_A$ and
+$\mathcal D_A(u,u')=\sum_es_e\int_euu'-\frac1{L(A\Omega)}(\sum_es_e\int_eu)(\sum_es_e\int_eu')$ on $\mathcal V$.
+If $\mathcal D_A$ is positive definite on $\mathcal V$, then~\eqref{eq:var} gives
+$\sigma_1(A\Omega)\le\min_{\mathcal V\setminus 0}\mathcal N_A/\mathcal D_A$.
+
+\section{The equilateral triangle}\label{sec:eq}
+
+Let $E=T(\frac12,\frac{\sqrt3}2)$, with side $1$ and $L(E)=3$. Let $z_0$ be its centroid and
+$w=-i\sqrt3\,(z-z_0)$, so that the circumradius is $1$ in $w$ and the apex lies on the positive real $w$-axis. The dihedral group $D_3$
+acts by $w\mapsto e^{2\pi i/3}w$ and $w\mapsto\bar w$.
+
+\subsection{An exactly equivariant trial pair}
+Given real coefficients $c_k$ ($k\le20$, $k\not\equiv0\bmod3$, fourteen in all), put
+$\mathfrak f=\sum_{k\equiv1}c_kw^k+\sum_{k\equiv2}c_k\bar w^k$, $u_1=\Re\mathfrak f$ and $u_2=\Im\mathfrak f$. Rotation by
+$2\pi/3$ multiplies $\mathfrak f$ by $e^{2\pi i/3}$, and reflection conjugates it. Hence $(u_1,u_2)$ transforms
+under $D_3$ exactly as the coordinates $(\Re w,\Im w)$ do, whatever the $c_k$ are. In particular
+$\int_{\partial E}u_a=0$; each $u_a$ is the real part of a holomorphic polynomial $\mathfrak f_a$ (since
+$\Re\bar w^k=\Re w^k$ and $\Im\bar w^k=-\Im w^k$), and by Schur's lemma all their Gram
+matrices are scalar. The $c_k$ come from a floating-point Ritz computation and are then fixed as exact
+binary numbers.
+
+Let $\tilde\sigma\approx\clsigmaTilde$ be the Rayleigh quotient of $u_1$, rounded to binary64. All
+boundary integrals of products of $u_a$ and $\partial_\nu u_a$ are integrals of polynomials along segments,
+and we compute them exactly in ball arithmetic. This gives the relative residual
+\[\eta:=\max_{f\in\operatorname{span}(u_1,u_2)\setminus0}\frac{\|\partial_\nu f-\tilde\sigma f\|_{L^2(\partial E)}}{\|f\|_{L^2(\partial E)}}\le\cletaMax.\]
+By Lemma~\ref{lem:incl}, $\Lam_E$ has at least two eigenvalues in $J=[\tilde\sigma-\eta,\tilde\sigma+\eta]$.
+
+\subsection{\texorpdfstring{A Crouzeix--Raviart lower bound for $\sigma_3(E)$}{A Crouzeix-Raviart lower bound for sigma3(E)}}
+Subdivide $E$ uniformly into $n_h^2$ equilateral cells $K$ of side $h=1/n_h$. Let $\mathcal C_h$ be the
+Crouzeix--Raviart space~\cite{CR}: piecewise linear functions that are continuous at the midpoints $x_e$ of
+interior edges. Let $\Pi_h$ be the interpolation by edge means, $(\Pi_hu)(x_e)=|e|^{-1}\int_eu$. Write
+$\mathfrak a_h(u,y)=\sum_K\int_K\nabla u\cdot\nabla y$ and $\mathfrak b(u,y)=\int_{\partial E}uy$, and let
+$\sigma_{h,0}\le\sigma_{h,1}\le\cdots$ be the finite eigenvalues of the pencil $(\mathfrak a_h,\mathfrak b)$
+on $\mathcal C_h$. The min--max principle holds over subspaces on which $\mathfrak b$ is positive definite.
+
+\begin{lemma}[Trace constant]\label{lem:trace}
+Let $K$ be an equilateral triangle of side $h$, $e$ an edge of $K$, and $\varphi\in H^1(K)$ with
+$\int_e\varphi=0$. Then
+\[\|\varphi\|^2_{L^2(e)}\le\frac{4}{\sqrt3}\Bigl(\frac1{\pi^2}+\frac1\pi\Bigr)h\,\|\nabla\varphi\|^2_{L^2(K)}.\]
+\end{lemma}
+\begin{proof}
+Let $\hat\varphi=\varphi-\bar\varphi_K$. Since $\varphi$ has mean zero on $e$, $\|\varphi\|_e\le\|\varphi-\zeta\|_e$ for every
+constant $\zeta$; in particular $\|\varphi\|_e\le\|\hat\varphi\|_e$. Let $O_e$ be the vertex opposite $e$. The
+field $(x-O_e)\hat\varphi^2$ has normal component $0$ on the two edges through $O_e$, and $2|K|/|e|$ times
+$\hat\varphi^2$ on $e$. Its divergence is $2\hat\varphi^2+2\hat\varphi\nabla\hat\varphi\cdot(x-O_e)$. The divergence
+theorem therefore gives
+\[\|\hat\varphi\|_e^2=\frac{|e|}{|K|}\Bigl(\|\hat\varphi\|_K^2+\int_K\hat\varphi\,\nabla\hat\varphi\cdot(x-O_e)\Bigr)
+\le\frac{|e|}{|K|}\bigl(\|\hat\varphi\|_K^2+h\|\hat\varphi\|_K\|\nabla\varphi\|_K\bigr).\]
+By the Payne--Weinberger inequality~\cite{PW,Beb} on the convex set $K$ of diameter $h$,
+$\|\hat\varphi\|_K\le\frac h\pi\|\nabla\varphi\|_K$. Finally $|e|/|K|=4/(\sqrt3h)$.
+\end{proof}
+
+\begin{lemma}[Projection bound; cf.~\cite{Liu,YXL}]\label{lem:liu}
+Let $n_h\ge2$ and $C_h^2=2\cdot\frac{4}{\sqrt3}(\frac1{\pi^2}+\frac1\pi)h$. Then for each $k$ below the number of
+boundary edges,
+\[\sigma_k(E)\ge\frac{\sigma_{h,k}}{1+C_h^2\sigma_{h,k}}.\]
+\end{lemma}
+\begin{proof}
+(i) For every $y_h\in\mathcal C_h$, $\mathfrak a_h(u-\Pi_hu,y_h)=0$. Indeed $\nabla y_h$ is constant on each
+cell $K$, and $\int_K\nabla(u-\Pi_hu)=\int_{\partial K}(u-\Pi_hu)\nu=0$ because $\Pi_hu|_K$ is linear and has
+the same edge means as $u$.
+
+(ii) Write $\varphi=u-\Pi_hu$. It has mean zero on every edge of every cell. Each boundary edge lies in one
+cell, and for $n_h\ge2$ a cell has at most two boundary edges (exactly two at the corners). Lemma~\ref{lem:trace} then
+gives $\mathfrak b(\varphi,\varphi)\le C_h^2\,\mathfrak a_h(\varphi,\varphi)$.
+
+(iii) Let $\mathcal Z_k$ be the span of the eigenfunctions of $\sigma_0,\dots,\sigma_k$, and take
+$u\in\mathcal Z_k$ with $\mathfrak b(u,u)=1$. Put $\upsilon=\mathfrak a_h(u-\Pi_hu,u-\Pi_hu)$. By (i),
+$\mathfrak a_h(\Pi_hu,\Pi_hu)=\int|\nabla u|^2-\upsilon\le\sigma_k-\upsilon$, and by (ii),
+$\mathfrak b(\Pi_hu,\Pi_hu)^{1/2}\ge1-C_h\sqrt\upsilon$. If $C_h^2\sigma_k\ge1$ the claim is trivial, since
+$x/(1+C_h^2x)<C_h^{-2}$. Otherwise $\Pi_h$ is injective on $\mathcal Z_k$, and
+\[\frac{\mathfrak a_h(\Pi_hu,\Pi_hu)}{\mathfrak b(\Pi_hu,\Pi_hu)}\le\max_{0\le\upsilon\le\sigma_k}\frac{\sigma_k-\upsilon}{(1-C_h\sqrt\upsilon)^2}=\frac{\sigma_k}{1-C_h^2\sigma_k}.\]
+The maximum is attained at $\sqrt\upsilon=C_h\sigma_k$. The min--max principle on the $(k+1)$-dimensional space
+$\Pi_h\mathcal Z_k$ gives $\sigma_{h,k}\le\sigma_k/(1-C_h^2\sigma_k)$, which rearranges to the claim.
+\end{proof}
+
+\begin{proposition}\label{prop:cr}
+$\sigma_3(E)\ge\clsigmaThreeLo$.
+\end{proposition}
+\begin{proof}
+Take $n_h=\clcrNh$, which gives $\clcrDofs$ degrees of freedom and $C_h^2=\clcrChSq\ldots$. Let $\mathbf S_h$ and
+$\mathbf B_h$ be the matrices of $\mathfrak a_h$ and $\mathfrak b$ in the edge basis of $\mathcal C_h$. On an
+equilateral cell the element stiffness matrix is
+\[\frac{2}{\sqrt3}\begin{pmatrix}2&-1&-1\\-1&2&-1\\-1&-1&2\end{pmatrix}.\]
+On a boundary edge, the basis function of that edge is $\equiv1$ and the other two are $\pm$ the linear function
+rising from $-1$ to $1$ along the edge, so the element boundary-mass entries are $h$, $h/3$ and $-h/3$. Let $\mathbf O$ be a fixed matrix with binary64 entries (computed once as approximate
+eigenvectors of $\mathbf S_h-3\mathbf B_h$). In ball arithmetic we check two things:
+\begin{itemize}
+\item the Gershgorin discs of $\mathbf O^T\mathbf O$ exclude $0$, so $\mathbf O$ is nonsingular;
+\item the Gershgorin discs of $\mathbf O^T(\mathbf S_h-3\mathbf B_h)\mathbf O$ consist of $3$ discs in
+$(-\infty,0)$ and $405$ discs in $(0,\infty)$.
+\end{itemize}
+By Sylvester's law, $\mathbf S_h-3\mathbf B_h$ has exactly three negative eigenvalues. If $\sigma_{h,3}<3$, it
+would be negative definite on a $4$-dimensional subspace. Hence $\sigma_{h,3}\ge3$, and
+Lemma~\ref{lem:liu} gives $\sigma_3(E)\ge3/(1+3C_h^2)=2.20036\ldots$.
+\end{proof}
+
+\begin{remark}\label{rem:sigma3}
+The bound is crude but sufficient. In fact $2\sqrt3\approx3.4641$ is an eigenvalue of $E$:
+$u=\Im\bigl((z-z_0)^3\bigr)+\frac1{12\sqrt3}$ satisfies $\partial_\nu u=2\sqrt3\,u$ on the base, by a direct computation,
+and hence on every side, since $\Im((z-z_0)^3)$ is invariant under rotation by $2\pi/3$. So
+$\sigma_3(E)\le2\sqrt3$. Numerically $\sigma_3(E)$ agrees with $2\sqrt3$ to $14$ digits, but we have not
+proved equality.
+\end{remark}
+
+\begin{proposition}\label{prop:eq}
+$\sigma_1(E)=\sigma_2(E)=:\sigma^*\in J$, and $\sigma_3(E)>\tilde\sigma+\eta$. Consequently
+$\Sigma(E)=3\sigma^*\in[\clSigmaElo,\,\clSigmaEhi]$.
+\end{proposition}
+\begin{proof}
+$J$ contains at least two eigenvalues. Since $\sigma_0=0<\tilde\sigma-\eta$ and
+$\sigma_3\ge\clsigmaThreeLo>\tilde\sigma+\eta$, these are $\sigma_1$ and $\sigma_2$, and every eigenvalue outside $J$ is
+$0$ or at least $\sigma^{\rm lo}=\clsigmaThreeLo$. Let $P$ be the spectral projection onto $J$. It commutes with the
+$D_3$-action, so $(Pu_1,Pu_2)$ is again an equivariant pair. Since $\tilde\sigma>0$, Lemma~\ref{lem:enclosure} gives
+$\|(I-P)u_a\|\le\eta\|u_a\|/(\sigma^{\rm lo}-\tilde\sigma)<10^{-12}\|u_a\|$; since $u_1\perp u_2$ with equal
+norms, $Pu_1,Pu_2$ are linearly independent. They therefore span the two-dimensional range of $P$, which
+carries the irreducible representation of $D_3$. By Schur's lemma $\Lam$ acts on this range as a scalar.
+\end{proof}
+
+\section{Local maximality}\label{sec:local}
+
+Let $\mathcal U$ be the eigenspace of $\sigma^*$, with basis $u^*_a=Pu_a$ ($a=1,2$). For
+$T=T(p,q)$, $p=\frac12+\rho\cos\psi$, $q=\frac{\sqrt3}{2}+\rho\sin\psi$, we have $T=A(E)$ with
+\[A=I+\rho\begin{pmatrix}0&\alpha\\0&\beta\end{pmatrix},\quad \alpha=\tfrac{2\cos\psi}{\sqrt3},\ \beta=\tfrac{2\sin\psi}{\sqrt3},\quad d:=\det A=1+\rho\beta .\]
+Number the edges $e_0=[(0,0),(1,0)]$, $e_1=[(1,0),\text{apex}]$ and $e_2=[\text{apex},(0,0)]$. Then
+$s_0=1$, while
+\[s_1=\bigl|\bigl(\rho\cos\psi-\tfrac12,\ \tfrac{\sqrt3}2+\rho\sin\psi\bigr)\bigr|,\qquad
+s_2=\bigl|\bigl(\rho\cos\psi+\tfrac12,\ \tfrac{\sqrt3}2+\rho\sin\psi\bigr)\bigr|\]
+are the side lengths of $T$, and $L_T=1+s_1+s_2$.
+
+The \emph{moments} of $\mathcal U$ are the following $2\times2$ matrices and vectors, indexed by $a,b$: the
+energy matrices $Q_{ij}=(\int_E\partial_iu^*_a\partial_ju^*_b)$, the edge Gram matrices
+$g^e=(\int_eu^*_au^*_b)$, and the edge-mean vectors $\mu^e=(\int_eu^*_a)$. They satisfy two exact identities:
+\begin{equation}\label{eq:exact}
+\textstyle\sum_e\mu^e=0,\qquad Q_{11}+Q_{22}=\sigma^*\sum_eg^e .
+\end{equation}
+The first holds because eigenfunctions of $\Lam$ with $\sigma^*\neq0$ are orthogonal to constants. The
+second is the weak eigen-equation on $\mathcal U$.
+
+\begin{lemma}\label{lem:crit}
+Let $X=\sigma^*\frac{3}{L_T}\mathcal D_A-\mathcal N_A$, where $\mathcal N_A,\mathcal D_A$ are the forms
+of~\eqref{eq:transplant} on $\mathcal U$. If $\mathcal D_A$ is positive definite and $X$ has a positive
+eigenvalue, then $\Sigma(T)<\Sigma(E)$.
+\end{lemma}
+\begin{proof}
+Choose $\xi$ with $\xi^TX\xi>0$. Then $\xi^T\mathcal N_A\xi<\frac{3\sigma^*}{L_T}\xi^T\mathcal D_A\xi$, and the trial
+function $\sum\xi_au^*_a\circ A^{-1}$ gives $\sigma_1(T)L_T<3\sigma^*$ through~\eqref{eq:var}.
+\end{proof}
+
+At $\rho=0$ the eigen-equation forces $X\equiv0$, so the sign of $X$ cannot be read off directly; instead we
+read it from $Y=X/\rho$. The factorisation below gives $Y$ in a form without division by $\rho$. At $\rho=0$,
+$Y$ is traceless, which produces the cone (Remark~\ref{rem:cone}).
+
+\begin{lemma}[$X=\rho Y$]\label{lem:XrhoY}
+Let $\lambda_e=(s_e-1)/\rho$. Then $\lambda_e=(\kappa_e+\rho)/(1+s_e)$, where
+$\kappa_1=-\cos\psi+\sqrt3\sin\psi$ and $\kappa_2=\cos\psi+\sqrt3\sin\psi$. Assume~\eqref{eq:exact}. Then
+$X=\rho Y$, where
+\[Y=\sigma^*\Bigl(\sum_e\omega_eg^e-\frac{3\rho}{L_T^2}vv^T\Bigr)-\sum_{i,j}H_{ij}Q_{ij},\qquad
+H=\begin{pmatrix}\beta+\rho\alpha^2/d&-\alpha/d\\-\alpha/d&-\beta/d\end{pmatrix},\]
+with $\omega_0=-(\lambda_1+\lambda_2)/L_T$, $\omega_1=(2\lambda_1-\lambda_2)/L_T$,
+$\omega_2=(2\lambda_2-\lambda_1)/L_T$ and $v=\lambda_1\mu^1+\lambda_2\mu^2$.
+\end{lemma}
+\begin{proof}
+First, $s_e^2=1+\rho\kappa_e+\rho^2$, so $s_e-1=\rho(\kappa_e+\rho)/(1+s_e)$.
+
+Next, $A^{-1}=\bigl(\begin{smallmatrix}1&-\rho\alpha/d\\0&1/d\end{smallmatrix}\bigr)$, which gives
+$dG-I=\rho H$.
+
+For the boundary terms, $\sum_es_e\mu^e=\sum_e(s_e-1)\mu^e=\rho v$ by~\eqref{eq:exact}. Also
+$(3/L_T)s_e-1=(3s_e-L_T)/L_T=\rho\,\omega_e$, using $s_0=1$.
+
+Hence $\sigma^*(3/L_T)\mathcal D_A-\sigma^*\sum_eg^e=\rho\,\sigma^*(\sum\omega_eg^e-3\rho vv^T/L_T^2)$, and
+$\mathcal N_A-(Q_{11}+Q_{22})=\rho\sum H_{ij}Q_{ij}$. Subtracting these two equations and
+using~\eqref{eq:exact} gives $X=\rho Y$.
+\end{proof}
+
+\begin{lemma}[Moment enclosures]\label{lem:moments}
+Let $\delta_a=u_a-u^*_a$ and $\gamma=\clsigmaThreeLo-\tilde\sigma$. Then
+\[\|\delta_a\|_{L^2(\partial E)}\le\eps_\partial:=\eta\|u_a\|_{\partial E}/\gamma,\qquad
+\|\nabla\delta_a\|_{L^2(E)}\le\eps_\nabla:=\sqrt{\clsigmaThreeLo}\;\eta\|u_a\|_{\partial E}/\gamma .\]
+Consequently each moment of $\mathcal U$ differs from the corresponding moment of $(u_1,u_2)$ by at most
+the following amounts:
+\begin{itemize}
+\item $\eps_\nabla(\|\nabla u_a\|+\|\nabla u_b\|+\eps_\nabla)$ for the entry $(a,b)$ of $Q_{ij}$;
+\item $\eps_\partial(\|u_a\|_{\partial E}+\|u_b\|_{\partial E}+\eps_\partial)$ for the entry $(a,b)$ of $g^e$;
+\item $|e|^{1/2}\eps_\partial$ for the entry $a$ of $\mu^e$.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+Apply Lemma~\ref{lem:enclosure} to $f=u_a$, with $\|r\|\le\eta\|u_a\|$; its hypotheses were verified in the
+proof of Proposition~\ref{prop:eq}. The moment bounds follow from Cauchy--Schwarz.
+\end{proof}
+
+Here $\|u_a\|^2_{\partial E}=\clgramE\ldots$, so $\eps_\partial\le\clepsBdryMax$ and
+$\eps_\nabla\le\clepsGradMax$. We compute the moments of $u_a$ exactly by Green's formula
+$\int_E\mathfrak g\dd A=\frac1{2i}\oint_{\partial E}\bar z\,\mathfrak g\dd z$ and
+$\int_E\mathfrak f_a'\overline{\mathfrak f_b'}\dd A=\frac1{2i}\oint_{\partial E}\overline{\mathfrak f_b}\mathfrak f_a'\dd z$ for holomorphic $\mathfrak g$. This turns every area integral into exact
+polynomial line integrals.
+
+\begin{proposition}\label{prop:local}
+Let $\rho_1=0.6$. For every $(p,q)$ with $0<\rho\le\rho_1$, $\Sigma(T(p,q))<\Sigma(E)$.
+\end{proposition}
+\begin{proof}
+We cover $[0,\rho_1]\times[0,6.3]$ in the $(\rho,\psi)$-plane by $\cllocalBoxes$ boxes obtained by bisection. Their
+interiors are disjoint and their areas add up exactly to $6.3\rho_1$, so they cover the rectangle. Since
+$6.3>2\pi$, the polar map sends the rectangle onto the closed disc $\rho\le\rho_1$. For each box we evaluate
+$Y$ and $\mathcal D_A$ in ball arithmetic, with the moments taken as the balls of Lemma~\ref{lem:moments} and
+$\sigma^*\in J$. In every box we verify that $\mathcal D_A$ is positive definite and that $\tr Y>0$ or
+$\det Y<0$. Either condition gives $Y$, and hence $X=\rho Y$ for $\rho>0$, a positive eigenvalue.
+Lemma~\ref{lem:crit} concludes.
+\end{proof}
+
+\begin{remark}[The cone]\label{rem:cone}
+At $\rho=0$, $Y$ is traceless with eigenvalues $\pm\clconeEig$, and $\mathcal D_I=\clgramE\,I$. Since
+$L(E)=3$, the certified upper bound $L_T\min_{\mathcal U\setminus0}\mathcal N_A/\mathcal D_A$ therefore equals
+\[\Sigma(E)-3\cdot\frac{\clconeEig}{\clgramE}\,\rho+O(\rho^2)=\Sigma(E)-\clconeSlope\,\rho+O(\rho^2),\]
+uniformly in $\psi$: the maximum is a cone, as expected when a double eigenvalue splits. Numerically, the
+true value satisfies $(\Sigma(E)-\Sigma(T))/\rho\to3.533$ along every direction tested, and $\sigma_2L$ rises
+at the same rate. So the transplanted eigenspace captures the first-order splitting exactly.
+\end{remark}
+
+\section{The far region and the proof of the theorem}\label{sec:far}
+
+For $0\le p\le\frac12$ put
+\[q_{\max}(p)=\min\Bigl(\sqrt{2p-p^2},\ \tfrac{\sqrt3}{2}-\sqrt{\rho_1^2-(p-\tfrac12)^2}\Bigr).\]
+
+\begin{lemma}\label{lem:cos}
+\textup{(i)} $F\cap\{\rho\ge\rho_1\}=\{(p,q):0<p\le\frac12,\ 0<q\le q_{\max}(p)\}$.
+
+\textup{(ii)} For $(p,q)\in F$, with $\ell_1=|(p,q)|$ and $\ell_2=|(1-p,q)|$,
+\[\Sigma(T(p,q))\le\pi^2q\,\Xi(p)\,(1+\ell_1+\ell_2),\qquad \Xi(p)=\mathcal I(p)+\mathcal I(1-p),\]
+where $\mathcal I(t)=\frac1t\int_0^tx\sin^2(\pi x)\dd x=\frac t4-\frac{\sin2\pi t}{4\pi}+\frac{\sin(\pi t)\sinc(\pi t)}{4\pi}$
+and $\sinc x=\sin x/x$.
+\end{lemma}
+\begin{proof}
+(i) For $(p,q)\in F$ we have $q\le\sqrt{2p-p^2}\le\frac{\sqrt3}2$, and $\rho\ge\rho_1$ means
+$(q-\frac{\sqrt3}2)^2\ge\rho_1^2-(p-\frac12)^2$, where the right side is positive because
+$|p-\frac12|\le\frac12<\rho_1$. Since $q<\frac{\sqrt3}2+\sqrt{\rho_1^2-(p-\frac12)^2}$, this is equivalent to
+$q\le\frac{\sqrt3}2-\sqrt{\rho_1^2-(p-\frac12)^2}$.
+
+(ii) Take $u=\cos(\pi x)$ in~\eqref{eq:var}. The vertical section of $T$ at abscissa $x$ has length $qx/p$
+for $x\le p$ and $q(1-x)/(1-p)$ for $x\ge p$, so the substitution $x\mapsto1-x$ on $[p,1]$ gives
+\[\int_T|\nabla u|^2=\pi^2q\Bigl(\frac1p\int_0^px\sin^2\pi x\dd x+\frac1{1-p}\int_0^{1-p}x\sin^2\pi x\dd x\Bigr)=\pi^2q\,\Xi(p).\]
+The antiderivative $\frac{x^2}4-\frac{x\sin2\pi x}{4\pi}-\frac{\cos2\pi x}{8\pi^2}$ and the identity
+$(1-\cos2\pi t)/t=2\pi\sin(\pi t)\sinc(\pi t)$ give the closed form of $\mathcal I$. The denominator of~\eqref{eq:var}
+is $\min_\zeta\int_{\partial T}(u-\zeta)^2$. On the side from $(0,0)$ to $(p,q)$ arc length is
+$(\ell_1/p)\dd x$ with $\ell_1/p\ge1$, and similarly on the third side. So for every constant $\zeta$,
+\[\int_{\partial T}(u-\zeta)^2\ge2\int_0^1(\cos\pi x-\zeta)^2\dd x=1+2\zeta^2\ge1.\]
+Hence $\Sigma(T)\le L\int_T|\nabla u|^2$ with $L=1+\ell_1+\ell_2$.
+\end{proof}
+
+\begin{proposition}\label{prop:far}
+For every $(p,q)\in F$ with $\rho\ge\rho_1$, $\Sigma(T(p,q))\le\clfarBound<\Sigma(E)$.
+\end{proposition}
+\begin{proof}
+By Lemma~\ref{lem:cos}(i) these are the points with $0<p\le\frac12$, $0<q\le q_{\max}(p)$. The bound of
+Lemma~\ref{lem:cos}(ii) is nondecreasing in $q$, and $\Xi\ge0$. On an interval $p_-\le p\le p_+$, the
+first entry of $q_{\max}$ is increasing in $p$ and the second is decreasing, so
+\[q_{\max}(p)\le q_+:=\min\Bigl(\sqrt{2p_+-p_+^2},\ \tfrac{\sqrt3}2-\sqrt{\rho_1^2-(p_--\tfrac12)^2}\Bigr).\]
+Moreover $\ell_1\le(p_+^2+q_+^2)^{1/2}$ and $\ell_2\le((1-p_-)^2+q_+^2)^{1/2}$. Hence on that interval
+\[\Sigma(T)\le\pi^2q_+\,\sup_{[p_-,p_+]}\Xi\,\Bigl(1+\sqrt{p_+^2+q_+^2}+\sqrt{(1-p_-)^2+q_+^2}\Bigr).\]
+We evaluate the right side in ball arithmetic on the $16$ intervals $[\frac k{32},\frac{k+1}{32}]$,
+$0\le k\le15$, which cover $[0,\frac12]$. The largest value is $\clfarMax$, below
+$\clSigmaElo\le\Sigma(E)$ (Proposition~\ref{prop:eq}). The margin is about $0.76$.
+\end{proof}
+
+\subsection*{Proof of Theorem~\ref{thm:main}}
+By Lemma~\ref{lem:param} we may take $T=T(p,q)$ with $(p,q)\in F$; if $\rho=0$, $T$ is equilateral. If
+$0<\rho\le\rho_1$, then
+$\Sigma(T)<\Sigma(E)$ by Proposition~\ref{prop:local}. If $\rho>\rho_1$, then $\Sigma(T)<\Sigma(E)$ by
+Proposition~\ref{prop:far}. The remaining statements are Propositions~\ref{prop:cr} and~\ref{prop:eq}.
+\qed
+
+\section{Implementation}\label{sec:cert}
+
+All certified steps use Arb~\cite{Arb} (python-flint~0.9.0), at $64$--$200$ bits.
+
+\textbf{Certificate data.} Floating-point arithmetic is used only to produce candidate data, which are then
+fixed and treated as exact binary numbers: the coefficients $c_k$ and the congruence matrix $\mathbf O$. These
+are committed to the repository, and the certified steps read only them. The shift $\tilde\sigma$ is computed
+from the $c_k$ in ball arithmetic and rounded to binary64. Hence the certified results do not depend on the
+linear-algebra library or the processor; regenerating the data is a separate, optional step. Every number of
+this paper that a computation checks is kept in a single claims file. The checking script compares each
+computed enclosure with these claims in exact rational arithmetic, and the paper's macros are generated from
+the same file.
+
+\textbf{Boxes.} Box endpoints are exact binary numbers. A parameter box $[x_0,x_1]$ enters as the Arb union of its two exact endpoints, which contains
+the whole interval. Square roots of nonnegative quantities whose balls straddle $0$ are clamped to
+$[0,\sqrt{\cdot}]$. In the code, $\rho_1$ is the binary double nearest $0.6$, which is
+$0.59999999999999997779\ldots$, slightly below $0.6$. The local and the far computations use this same value,
+so the two regions meet exactly. The tiling of the local boxes is checked with exact float comparisons and an
+exact rational area sum.
+
+\textbf{Consistency checks} (not part of the proof).
+\begin{itemize}
+\item The Green-formula moments agree with brute-force quadrature on random harmonic polynomials to
+$5\times10^{-14}$.
+\item The transplant bound of \S\ref{sec:local}, and the full Rayleigh quotient of $\cos(\pi x)$, agree with
+direct quadrature on $T$ to about $10^{-14}$.
+\item At $20$ sample triangles both bounds lie above the floating-point Ritz value of $\Sigma$, as upper
+bounds must.
+\item The Crouzeix--Raviart discrete values are $\sigma_{h,1}=\clcrSigmaEight$ for $n_h=8$ and $\clcrSigmaSixteen$ for
+$n_h=16$, increasing towards $\sigma^*=1.29082$.
+\end{itemize}
+
+\textbf{Code names.} Some identifiers differ from the notation here. In the Python code, $\tilde\sigma$ is
+\texttt{sig}, the edge means $\mu^e$ are \texttt{mm}, $\lambda_1,\lambda_2$ are \texttt{d1}, \texttt{d2},
+the $\omega_e$ are \texttt{ce}, and $\mathcal D_A$ is \texttt{D}. In Lean, the $\mu^e$ are \texttt{m0x},
+\dots, \texttt{m2y}, the $\omega_e$ are \texttt{c0}, \texttt{c1}, \texttt{c2}, and $\mathcal N_A,\mathcal D_A$
+are \texttt{NA}, \texttt{DA}.
+
+\textbf{Lean.} A Lean~4/Mathlib development formalises the elementary steps:
+\begin{itemize}
+\item the triangle isoperimetric inequality in Heron form, with its equality case, and the deduction of
+Corollary~\ref{cor:area};
+\item the algebra of Lemma~\ref{lem:XrhoY};
+\item the integral defining $\mathcal I$ in Lemma~\ref{lem:cos}, and the two edge integrals of $\cos(\pi x)$ used in
+the consistency checks.
+\end{itemize}
+It uses no \texttt{sorry}, and its only axioms are \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}. It does not formalise the spectral theory, the trace and Payne--Weinberger
+inequalities, or the ball-arithmetic computations.
+
+\textbf{Availability.} The code, the logs, the box certificates and the Lean files are in the accompanying
+repository\footnote{\url{https://github.com/jasondavies/steklov-triangles}.}. The single command \texttt{scripts/verify.py} reruns all of them and writes a PASS/FAIL
+summary.
+
+\section{Numerical observations (not rigorous)}\label{sec:numerics}
+
+Except for the certified upper bounds in Table~\ref{tab:values}, the statements in this section are
+numerical. They use the harmonic-polynomial Ritz method, with trial space $\{\Re w^k,\Im w^k\}_{k\le n}$ and
+all integrals computed on the boundary.
+
+\begin{observation}[Global picture]
+On a $25\times30$ grid over $F$ (double precision, $n=30$) the largest value of $\Sigma$ is attained at the
+equilateral apex. Table~\ref{tab:values} lists selected values, sorted by $\Sigma$, together with the regular
+$N$-gons for $N=4,5,6$. They are computed as follows:
+\begin{itemize}
+\item the Ritz matrices are exact polynomial line integrals, evaluated in ball arithmetic;
+\item the eigenproblem is solved in $50$- and $80$-digit arithmetic with the full basis of $2n$
+directions, for $n=30,40,50$;
+\item the estimate is the value for $n=50$;
+\item its error is estimated (not rigorously) as twice the largest of the last change in $n$, a geometric
+and a power-law extrapolation of the remaining changes, and the change between the two precisions; the
+estimate is printed only to the digits this error justifies;
+\item the certified upper bound is the Rayleigh quotient of the fixed $n=50$ trial function, evaluated in
+ball arithmetic on the exact polygon.
+\end{itemize}
+Convergence is super-geometric for $E$, the square, and the right-angled triangles. It is slowest for the
+polygons with an angle of $108^\circ$ or $120^\circ$ (the $30$--$30$--$120$ triangle, the pentagon and the
+hexagon), whose corners produce the strongest singularities.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lll}
+\toprule polygon & certified upper bound for $\Sigma$ & estimate of $\Sigma$\\\midrule
+$60$--$60$--$60$ & $\clTequiUp$ & $\clTequiEst\pm\clTequiErr$\\
+$50$--$50$--$80$ & $\clTfiftyUp$ & $\clTfiftyEst\pm\clTfiftyErr$\\
+$70$--$70$--$40$ & $\clTseventyUp$ & $\clTseventyEst\pm\clTseventyErr$\\
+$40$--$60$--$80$ & $\clTfortyUp$ & $\clTfortyEst\pm\clTfortyErr$\\
+$45$--$45$--$90$ & $\clTrightisoUp$ & $\clTrightisoEst\pm\clTrightisoErr$\\
+$30$--$60$--$90$ & $\clThalfeqUp$ & $\clThalfeqEst\pm\clThalfeqErr$\\
+$30$--$30$--$120$ & $\clTobtuseUp$ & $\clTobtuseEst\pm\clTobtuseErr$\\
+\midrule
+square & $\clTsquareUp$ & $\clTsquareEst\pm\clTsquareErr$\\
+regular pentagon & $\clTpentagonUp$ & $\clTpentagonEst\pm\clTpentagonErr$\\
+regular hexagon & $\clThexagonUp$ & $\clThexagonEst\pm\clThexagonErr$\\
+\bottomrule
+\end{tabular}
+\caption{Values of $\Sigma=\sigma_1L$: a certified upper bound, and an estimate with an estimated (not rigorous)
+error.}\label{tab:values}
+\end{table}
+
+\smallskip
+The regular $N$-gon values increase with $N$, consistent with~\cite{CGHLY}.
+\end{observation}
+
+\begin{observation}[Thin triangles]
+As $q\to0$ with $p$ fixed, $\Sigma(T(p,q))=2q\,\theta(p)+o(q)$, where
+\[\theta(p)=\min\Bigl\{\frac{\int_0^1\Phi_pu'^2}{2\int_0^1u^2}:\int_0^1u=0\Bigr\}\]
+and $\Phi_p$ is the tent function with peak $1$ at $p$. This is the formal thin-domain limit: the
+eigenfunction becomes a function of $x$, and both long sides carry the boundary weight. For $p=0$ the
+Euler--Lagrange equation $((1-x)u')'+2\theta u=0$ gives $\theta(0)=j_{1,1}^2/8=\clthetaZero$. Numerically
+$\theta(0.05)=\clthetaA$, $\theta(0.25)=\clthetaB$ and $\theta(\frac12)=\clthetaC$. The double-precision Ritz values ($n=40$)
+of $\Sigma/(2q)$ at $q=0.01$ agree with these to $\clthinAgree$ relative. In particular
+$\Sigma(T)\approx2.89\,\vartheta(T)$ for thin isosceles triangles, compared with the rigorous constant $45.6$
+of~\cite{DGMRV}.
+\end{observation}
+
+\section{Remarks}
+
+The local argument depends only on a few moments of the exact eigenspace and on the two exact
+identities~\eqref{eq:exact}. The quality of the eigenfunction approximation enters only through tiny
+enclosure radii.
+
+For $n\ge4$ the affine group no longer acts transitively on similarity classes of $n$-gons, so one needs
+a richer family of transplantations, for example piecewise affine or Schwarz--Christoffel maps. Also, the far
+region is no longer controlled by a single trial function. The conjecture remains open for every $n\ge4$.
+
+\section*{Declaration of AI-generated research and authorship}
+This manuscript is the product of an AI-driven research process. During a
+broader investigation of open problems from the AIM problem lists, initiated
+by the human author, an AI system identified this problem as a candidate,
+found the proof, and wrote the code for the certified computations. The author
+then directed AI systems to package the result, formalise parts of it in Lean
+and prepare this manuscript. The AI systems developed the results and their
+presentation, including the mathematical exposition, the computations, the
+formalisation, and the organisation and writing of the text; the human author
+wrote no part of the manuscript. The system was Claude Opus~5.5 (Anthropic),
+used through Claude Code.
+
+The proof is computer-assisted and is reproduced by \texttt{scripts/verify.py}; the Lean development covers
+only the elementary steps listed in \S\ref{sec:cert}.
+
+The human author has not read this manuscript or checked its arguments. At
+the time of writing, the mathematics, the code and the formalisation have
+been checked only by AI systems and by the computer verification described
+above; no independent human expert has reviewed them. The author takes
+responsibility for the accuracy of this disclosure.
+
+\raggedright
+\begin{thebibliography}{99}
+\bibitem{AimPL} AIM Problem Lists, \emph{Steklov eigenproblems}, Section~4 (Shape optimisation for Steklov), Problem~4.6 (\'E.~Oudet), \url{http://aimpl.org/stekloveigen/4}.
+\bibitem{Arb} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE Trans.\ Comput.\ \textbf{66} (2017), 1281--1292.
+\href{https://doi.org/10.1109/TC.2017.2690633}{doi:10.1109/TC.2017.2690633}.
+\bibitem{Beb} M.~Bebendorf, \emph{A note on the Poincar\'e inequality for convex domains}, Z.~Anal.\ Anwend.\ \textbf{22} (2003), 751--756.
+\href{https://doi.org/10.4171/ZAA/1170}{doi:10.4171/ZAA/1170}.
+\bibitem{CGHLY} Z.~Cheng, C.~Gui, Y.~Hu, Q.~Li, R.~Yao, \emph{Global strict monotonicity and asymptotics of the first Steklov eigenvalue for regular polygons}, arXiv:2603.25116v2 (2026).
+\href{https://doi.org/10.48550/arXiv.2603.25116}{doi:10.48550/arXiv.2603.25116}.
+\bibitem{CR} M.~Crouzeix, P.-A.~Raviart, \emph{Conforming and nonconforming finite element methods for solving the stationary Stokes equations~I}, RAIRO Anal.\ Num\'er.\ \textbf{7} (1973), 33--75.
+\href{https://doi.org/10.1051/m2an/197307R300331}{doi:10.1051/m2an/197307R300331}.
+\bibitem{DK} C.~Davis, W.~M.~Kahan, \emph{The rotation of eigenvectors by a perturbation.~III}, SIAM J.\ Numer.\ Anal.\ \textbf{7} (1970), 1--46.
+\href{https://doi.org/10.1137/0707001}{doi:10.1137/0707001}.
+\bibitem{DNS} S.~Dominguez, N.~Nigam, B.~Shahriari, \emph{A combined finite element and Bayesian optimization framework for shape optimization in spectral geometry}, Comput.\ Math.\ Appl.\ \textbf{74} (2017), no.~11, 2874--2896.
+\href{https://doi.org/10.1016/j.camwa.2017.08.044}{doi:10.1016/j.camwa.2017.08.044}.
+\bibitem{DGMRV} E.~B.~Dryden, C.~Gordon, J.~Moreno, J.~Rowlett, C.~Villegas-Blas, \emph{The Steklov spectrum of convex polygonal domains~I: spectral finiteness}, J.\ Geom.\ Anal.\ \textbf{35} (2025), no.~3, Paper No.~91.
+\href{https://doi.org/10.1007/s12220-025-01922-8}{doi:10.1007/s12220-025-01922-8}.
+\bibitem{GLPS} A.~Girouard, J.~Lagac\'e, I.~Polterovich, A.~Savo, \emph{The Steklov spectrum of cuboids}, Mathematika \textbf{65} (2019), no.~2, 272--310.
+\href{https://doi.org/10.1112/S0025579318000414}{doi:10.1112/S0025579318000414}.
+\bibitem{GP} A.~Girouard, I.~Polterovich, \emph{Spectral geometry of the Steklov problem}, J.\ Spectr.\ Theory \textbf{7} (2017), 321--359.
+\href{https://doi.org/10.4171/JST/164}{doi:10.4171/JST/164}.
+\bibitem{LS} R.~S.~Laugesen, B.~A.~Siudeja, \emph{Maximizing Neumann fundamental tones of triangles}, J.\ Math.\ Phys.\ \textbf{50} (2009), 112903.
+\href{https://doi.org/10.1063/1.3246834}{doi:10.1063/1.3246834}.
+\bibitem{Liu} X.~Liu, \emph{A framework of verified eigenvalue bounds for self-adjoint differential operators}, Appl.\ Math.\ Comput.\ \textbf{267} (2015), 341--355.
+\href{https://doi.org/10.1016/j.amc.2015.03.048}{doi:10.1016/j.amc.2015.03.048}.
+\bibitem{PW} L.~E.~Payne, H.~F.~Weinberger, \emph{An optimal Poincar\'e inequality for convex domains}, Arch.\ Rational Mech.\ Anal.\ \textbf{5} (1960), 286--292.
+\href{https://doi.org/10.1007/BF00252910}{doi:10.1007/BF00252910}.
+\bibitem{Weinstock} R.~Weinstock, \emph{Inequalities for a classical eigenvalue problem}, J.\ Rational Mech.\ Anal.\ \textbf{3} (1954), 745--753.
+\href{https://doi.org/10.1512/iumj.1954.3.53036}{doi:10.1512/iumj.1954.3.53036}.
+\bibitem{YXL} C.~You, H.~Xie, X.~Liu, \emph{Guaranteed eigenvalue bounds for the Steklov eigenvalue problem}, SIAM J.\ Numer.\ Anal.\ \textbf{57} (2019), 1395--1410.
+\href{https://doi.org/10.1137/18M1189592}{doi:10.1137/18M1189592}.
+\end{thebibliography}
+
+\end{document}

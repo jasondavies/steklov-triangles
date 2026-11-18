@@ -1,0 +1,6 @@
+$ python test_moments.py
+max |Q_rig - Q_quad| = 5.295763827461997e-14  (scale 0.29358870027490647 )
+max |G| err: 1.942890293094024e-15  max |m| err: 9.159339953157541e-16
+TEST_MOMENTS: ALL PASS
+
+[gate] ok   test_moments.json reports ok

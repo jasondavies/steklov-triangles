@@ -1,0 +1,16 @@
+$ python numerics_extra.py
+theta(0): exact j_{1,1}^2/8 = 1.835246, numeric 1.835246
+p=0.05  theta(p)=1.931679   Sigma/(2q) at q=0.04,0.02,0.01: 1.930207 1.931308 1.931587
+p=0.25  theta(p)=2.409573   Sigma/(2q) at q=0.04,0.02,0.01: 2.406732 2.408881 2.409423
+p=0.50  theta(p)=2.891593   Sigma/(2q) at q=0.04,0.02,0.01: 2.886740 2.890431 2.891358
+explicit eigenfunction: max |d_n u - 2sqrt3 u| on dE = 3.33e-16
+Ritz sigma_3(E) = 3.464101615137761, 2 sqrt3 = 3.464101615137754, difference 6.2e-15
+CR n_h=8: sigma_{h,1} = 1.280424
+CR n_h=16: sigma_{h,1} = 1.287895
+NUMERICS_EXTRA: ALL PASS
+
+[gate] ok   numerics_extra reports ok
+[gate] ok   CR discrete sigma_{h,1} = 1.28042, 1.28790
+[gate] ok   theta(0) = 1.83525
+[gate] ok   theta(0.05), theta(0.25), theta(1/2)
+[gate] ok   thin-triangle agreement <= 4e-4

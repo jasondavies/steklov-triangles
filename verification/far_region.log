@@ -1,0 +1,28 @@
+$ python far_region.py
+S_lo = [3.87246159577222003 +/- 1.98e-18]
+p in [0.0      0.03125 ]  Q <= 0.248039   Sigma <= 1.5709  ok
+p in [0.03125  0.0625  ]  Q <= 0.347985   Sigma <= 2.3677  ok
+p in [0.0625   0.09375 ]  Q <= 0.422742   Sigma <= 3.0497  ok
+p in [0.09375  0.125   ]  Q <= 0.424482   Sigma <= 3.1144  ok
+p in [0.125    0.15625 ]  Q <= 0.397651   Sigma <= 2.9164  ok
+p in [0.15625  0.1875  ]  Q <= 0.374257   Sigma <= 2.7464  ok
+p in [0.1875   0.21875 ]  Q <= 0.353830   Sigma <= 2.6014  ok
+p in [0.21875  0.25    ]  Q <= 0.336027   Sigma <= 2.4748  ok
+p in [0.25     0.28125 ]  Q <= 0.320590   Sigma <= 2.3877  ok
+p in [0.28125  0.3125  ]  Q <= 0.307323   Sigma <= 2.3339  ok
+p in [0.3125   0.34375 ]  Q <= 0.296075   Sigma <= 2.2879  ok
+p in [0.34375  0.375   ]  Q <= 0.286728   Sigma <= 2.2491  ok
+p in [0.375    0.40625 ]  Q <= 0.279191   Sigma <= 2.2169  ok
+p in [0.40625  0.4375  ]  Q <= 0.273395   Sigma <= 2.1907  ok
+p in [0.4375   0.46875 ]  Q <= 0.269289   Sigma <= 2.1700  ok
+p in [0.46875  0.5     ]  Q <= 0.266840   Sigma <= 2.1546  ok
+intervals tile [0, 1/2]: True
+max certified bound on the far region: 3.1144
+FAR REGION: ALL PASS
+
+[gate] ok   every far interval passes and the intervals tile [0,1/2]
+[gate] ok   16 intervals
+[gate] ok   same rho1 as the local region
+[gate] ok   far-region maximum <= 3.12
+[gate] ok   far-region maximum = 3.1144 (4 decimals)
+[gate] ok   far bound < lower bound of Sigma(E)

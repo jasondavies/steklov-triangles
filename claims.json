@@ -1,0 +1,115 @@
+{
+ "_comment": "Every numerical claim of the paper that a certified or numerical step checks. scripts/verify.py compares the steps' JSON outputs against these values in exact rational arithmetic, and scripts/make_claims_tex.py writes paper/claims.tex (LaTeX macros) from this file, so the paper and the checks share one source.",
+ "SigmaElo": "3.8724615957722",
+ "SigmaEhi": "3.8724615957734",
+ "areaElo": "0.8494076787253",
+ "areaEhi": "0.8494076787257",
+ "etaMax": "1.9559e-13",
+ "sigmaTilde": "1.290820531924",
+ "sigmaThreeLo": "2.2003",
+ "crNh": "16",
+ "crDofs": "408",
+ "crMu": "3",
+ "crNeg": "3",
+ "crChSq": "0.121137",
+ "rhoOne": "0.6",
+ "psiMax": "6.3",
+ "localBoxes": "460",
+ "epsBdryMax": "2.71e-13",
+ "epsGradMax": "4.01e-13",
+ "coneEig": "1.857812",
+ "gramE": "1.577442",
+ "coneSlope": "3.53321",
+ "farIntervals": "16",
+ "farMax": "3.1144",
+ "farBound": "3.12",
+ "crSigmaEight": "1.28042",
+ "crSigmaSixteen": "1.28790",
+ "thetaZero": "1.83525",
+ "thetaA": "1.93168",
+ "thetaB": "2.40957",
+ "thetaC": "2.89159",
+ "thinAgree": "4e-4",
+ "table": [
+  {
+   "key": "equi",
+   "name": "60-60-60",
+   "estimate": "3.8724615957728",
+   "error": "1e-13",
+   "error_tex": "1\\times10^{-13}",
+   "upper": "3.8724615957729"
+  },
+  {
+   "key": "fifty",
+   "name": "50-50-80",
+   "estimate": "2.87773098574",
+   "error": "3e-11",
+   "error_tex": "3\\times10^{-11}",
+   "upper": "2.8777309857377"
+  },
+  {
+   "key": "seventy",
+   "name": "70-70-40",
+   "estimate": "2.573076572892",
+   "error": "2e-12",
+   "error_tex": "2\\times10^{-12}",
+   "upper": "2.5730765728918"
+  },
+  {
+   "key": "forty",
+   "name": "40-60-80",
+   "estimate": "2.53503581509",
+   "error": "2e-11",
+   "error_tex": "2\\times10^{-11}",
+   "upper": "2.5350358150935"
+  },
+  {
+   "key": "rightiso",
+   "name": "45-45-90",
+   "estimate": "2.4960723700475",
+   "error": "1e-13",
+   "error_tex": "1\\times10^{-13}",
+   "upper": "2.4960723700476"
+  },
+  {
+   "key": "halfeq",
+   "name": "30-60-90",
+   "estimate": "1.9013817577255",
+   "error": "1e-13",
+   "error_tex": "1\\times10^{-13}",
+   "upper": "1.9013817577256"
+  },
+  {
+   "key": "obtuse",
+   "name": "30-30-120",
+   "estimate": "1.5603441",
+   "error": "3e-7",
+   "error_tex": "3\\times10^{-7}",
+   "upper": "1.5603440800120"
+  },
+  {
+   "key": "square",
+   "name": "regular 4-gon",
+   "estimate": "5.5060219386901",
+   "error": "1e-13",
+   "error_tex": "1\\times10^{-13}",
+   "upper": "5.5060219386902"
+  },
+  {
+   "key": "pentagon",
+   "name": "regular 5-gon",
+   "estimate": "5.9774726",
+   "error": "4e-7",
+   "error_tex": "4\\times10^{-7}",
+   "upper": "5.9774725550439"
+  },
+  {
+   "key": "hexagon",
+   "name": "regular 6-gon",
+   "estimate": "6.135570",
+   "error": "5e-6",
+   "error_tex": "5\\times10^{-6}",
+   "upper": "6.1355701455936"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+$ python coverage_check.py
+L3   PASS RHO1 = 0.6 = 0x1.3333333333333p-1 (local.py and far_region.py)
+||r|| <= [2.4565180041653813800661174292696721e-13 +/- 4.15e-48]  eps_L2(bdry) <= [2.7008271412666180645319833626764863e-13 +/- 1.31e-48]  eps_energy <= [4.0063048549180299322714588200034274e-13 +/- 4.01e-48]
+Gram of (u1,u2) on dE: [[[1.5774419328840518305790178675190114 +/- 4.99e-35], [3.5735028264997540242249590731556269e-36 +/- 3.95e-71]], [[3.5735028264997540242249590731556269e-36 +/- 3.95e-71], [1.5774419328840518305790178675190115 +/- 4.72e-35]]]
+sum_e m^e: [[+/- 2.78e-34], [+/- 2.44e-34]]
+L1   PASS 460 leaves tile [0,RHO1]x[0,6.3]; overlaps=0 exact-area-sum=True; PSI_MAX > 2pi: True
+L2   PASS 460 leaves re-certified (tr Y > 0 or det Y < 0, D_A > 0)
+COVERAGE CHECK: ALL PASS
+
+[gate] ok   local boxes tile the disc
+[gate] ok   all 460 local boxes re-certified
+[gate] ok   same rho1
