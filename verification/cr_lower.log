@@ -1,11 +1,12 @@
 $ python cr_lower.py
-n_h=16  dofs=408  cells=256  max boundary edges per cell=2
-mu=3.0: certified #neg discs=3, #pos discs=405 (n=408), O nonsingular=True
-=> sigma_{h,3} >= 3.0 and sigma_3(E) >= mu/(1+C_h^2 mu) = [2.2003633777553197789457 +/- 2.10e-23]   (C_h^2 = [0.12113705556222295110579 +/- 2.57e-24])
+n_h=24  dofs=900  cells=576  max boundary edges per cell=2
+mu=5.0: certified #neg discs=4, #pos discs=896 (n=900), O nonsingular=True
+=> sigma_{h,4} >= 5.0 and sigma_4(E) >= mu/(1+C_h^2 mu) = [3.5617858371486267230308 +/- 3.41e-23]   (C_h^2 = [0.080758037041481967403859 +/- 8.50e-25])
 CR LOWER: ALL PASS
 
 [gate] ok   inertia certificate valid, O nonsingular, <= 2 boundary edges per cell
-[gate] ok   n_h = 16, 408 dofs
-[gate] ok   exactly 3 negative eigenvalues of S_h - 3 B_h
-[gate] ok   sigma_3(E) >= 2.2003
-[gate] ok   C_h^2 = 0.121137...
+[gate] ok   n_h = 24, 900 dofs
+[gate] ok   exactly 4 negative eigenvalues of S_h - 5 B_h
+[gate] ok   exactly 896 positive eigenvalues
+[gate] ok   sigma_4(E) > 3.5617858371486 > 2 sqrt(3)
+[gate] ok   C_h^2 = 0.080758...

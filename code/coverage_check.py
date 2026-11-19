@@ -49,7 +49,7 @@ two_pi_ok = bool(arb(PSI_MAX) > 2 * arb.pi())
 report('L1', inside and overlap == 0 and area_ok and two_pi_ok,
        '%d leaves tile [0,RHO1]x[0,%r]; overlaps=%d exact-area-sum=%s; PSI_MAX > 2pi: %s' % (n, PSI_MAX, overlap, area_ok, two_pi_ok))
 recert = all(local.certify_box(*b) for b in lboxes)
-report('L2', recert, '%d leaves re-certified (tr Y > 0 or det Y < 0, D_A > 0)' % n)
+report('L2', recert, '%d leaves re-certified (positive direction of 2Y - D_A/2, D_A > 0)' % n)
 json.dump(dict(ok=bool(ok_all), leaves=n, overlaps=overlap, exact_area_sum=bool(area_ok), psi_max_gt_2pi=two_pi_ok,
                rho1=RHO1.hex(), psi_max=PSI_MAX.hex()), open('../verification/coverage_check.json', 'w'), indent=1)
 print('COVERAGE CHECK:', 'ALL PASS' if ok_all else 'FAIL')

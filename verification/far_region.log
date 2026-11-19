@@ -23,6 +23,6 @@ FAR REGION: ALL PASS
 [gate] ok   every far interval passes and the intervals tile [0,1/2]
 [gate] ok   16 intervals
 [gate] ok   same rho1 as the local region
-[gate] ok   far-region maximum <= 3.12
+[gate] ok   far-region maximum <= 3.114382798607
 [gate] ok   far-region maximum = 3.1144 (4 decimals)
-[gate] ok   far bound < lower bound of Sigma(E)
+[gate] ok   far-region deficit exceeds 1/2

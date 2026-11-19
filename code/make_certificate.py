@@ -7,7 +7,7 @@ valid) data; the claims in ../claims.json must then be re-checked by scripts/ver
 
   ../data/equilateral_pair.json  coefficients c_k (exact binary64, hex) of the D3-equivariant pair
                                  (u1, u2) on E, degree n = 20
-  ../data/cr_congruence.npz      congruence matrix O (binary64) for S_h - mu B_h, n_h = 16, mu = 3
+  ../data/cr_congruence.npz      congruence matrix O (binary64) for S_h - mu B_h, n_h = 24, mu = 5
 """
 import sys, json
 import numpy as np
@@ -35,7 +35,7 @@ def equilateral_pair(n=20):
     print("float Ritz sigma_1 L(E) =", 3 * ev[0])
     return dict(n=n, ks=ks, c_hex=[float(a).hex() for a in alpha])
 
-def cr_congruence(m=16, mu=3.0):
+def cr_congruence(m, mu):
     from cr_lower import assemble
     Sint, B3, _, _ = assemble(m)
     S = (2 / np.sqrt(3)) * Sint - mu * (1.0 / (3 * m)) * B3
@@ -45,6 +45,7 @@ def cr_congruence(m=16, mu=3.0):
 if __name__ == "__main__":
     pair = equilateral_pair()
     json.dump(pair, open('../data/equilateral_pair.json', 'w'), indent=1)
-    O = cr_congruence()
-    np.savez_compressed('../data/cr_congruence.npz', O=O, m=16, mu=3.0)
+    m, mu = 24, 5.0
+    O = cr_congruence(m, mu)
+    np.savez_compressed('../data/cr_congruence.npz', O=O, m=m, mu=mu)
     print("wrote ../data/equilateral_pair.json and ../data/cr_congruence.npz")

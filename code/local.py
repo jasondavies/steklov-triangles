@@ -6,19 +6,17 @@ T = A(E) with A = I + rho [[0, a],[0, b]], a = 2cos(psi)/sqrt3, b = 2 sin(psi)/s
 Trial space on T: {u o A^{-1} : u in E*}, E* = EXACT first eigenspace of E (dim 2).
 Exact moments of E* (energy tensor Q, edge Gram g^e, edge means m^e, eigenvalue sigma*)
 are enclosed from the explicit equivariant pair (u1,u2) of equilateral.py plus Davis-Kahan
-bounds (residual from equilateral.py, gap from the CR bound sigma_3(E) >= 2.2).
+bounds (residual from equilateral.py, gap from the cubic eigenvalue and the CR bound on sigma_4(E)).
 
-sigma_1(T) L_T < sigma* L_E  <=  X := sigma* (L_E/L_T) D_A - N_A has a positive eigenvalue
-(with D_A positive definite).  Using the EXACT identities  sum_e m^e = 0  and  N_I = sigma* D_I,
+Set X = sigma* (L_E/L_T) D_A - N_A. Using the exact identities sum_e m^e = 0 and N_I = sigma* D_I,
 X = rho * Y with the singularity-free expression
   Y = sigma* [ sum_e c_e g^e - 3 rho v v^T / L_T^2 ] - sum_ij H_ij Q_ij,
   H = (|det A| A^{-1}A^{-T} - I)/rho,  c_e = ((L_E/L_T) s_e - 1)/rho,  v = sum_e ((s_e-1)/rho) m^e.
 We cover (rho, psi) in [0, rho1] x [0, 6.3] (6.3 > 2pi) by boxes and check, in ball arithmetic,
-tr Y > 0 or det Y < 0, together with D_A > 0.  This proves sigma_1 L(T) < sigma_1 L(E) for
-0 < rho <= rho1 (every direction), i.e. strict local maximality, including the conical rate.
+that 2Y - D_A/2 has a positive eigenvalue and D_A is positive definite.
+The resulting deficit exceeds L_T*rho/4 for 0 < rho <= rho1.
 """
 import sys, json
-import numpy as np
 sys.path.insert(0, '.')
 from flint import acb, arb, ctx
 from rig import moments, residual_sq, enc, dec
@@ -29,8 +27,9 @@ eq = json.load(open('../verification/equilateral.json'))         # certified out
 cr = json.load(open('../verification/cr_lower.json'))            # certified output of cr_lower.py
 n = cert['n']; ks = cert['ks']; alpha = [float.fromhex(h) for h in cert['c_hex']]
 sig = arb(float.fromhex(eq['sigma_tilde_hex'])); eta = dec(eq['eta_upper'])
-s3lo = dec(cr['sigma3_lower'])
-assert sig > 0          # Lemma 2.2 needs sigma~ >= 0
+s3lo = 2 * arb(3).sqrt()
+assert cr['ok'] and dec(cr['sigma4_lower']) > s3lo
+assert sig - eta > 0
 sq3 = arb(3).sqrt()
 Zb = [acb(0), acb(1), acb(arb(1) / 2, sq3 / 2)]
 zc = acb(arb(1) / 2, sq3 / 6); Rb = 1 / sq3
@@ -49,7 +48,7 @@ for c in cb:
 rnorm = arb((eta * max(u2[0].sqrt().upper(), u2[1].sqrt().upper())).upper())
 gap = s3lo - sig
 assert gap > 0
-assert s3lo > sig + eta, "sigma_3 lower bound must exceed the inclusion window (paper, Prop. 3.5)"
+assert s3lo > sig + eta, "sigma_3 lower bound must exceed the inclusion window (paper, Prop. 3.4)"
 epsL = rnorm / gap
 epsE = s3lo.sqrt() * rnorm / gap
 print("||r|| <=", rnorm, " eps_L2(bdry) <=", epsL, " eps_energy <=", epsE)
@@ -96,13 +95,13 @@ def ball(lo, hi):
     """A ball containing the closed interval [lo, hi] (lo, hi exact binary floats)."""
     return arb(lo).union(arb(hi))
 
+def det2(matrix):
+    return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+
 def certify_box(r0, r1, p0, p1):
-    rho = ball(r0, r1); psi = ball(p0, p1)
-    Y, D = Ybox(rho, psi)
-    trY = Y[0][0] + Y[1][1]
-    detY = Y[0][0] * Y[1][1] - Y[0][1] * Y[1][0]
-    Dpd = (D[0][0] > 0) and (D[0][0] * D[1][1] - D[0][1] * D[1][0] > 0)
-    return bool(Dpd and ((trY > 0) or (detY < 0)))
+    Y, D = Ybox(ball(r0, r1), ball(p0, p1))
+    Z = [[2 * Y[i][j] - D[i][j] / 2 for j in range(2)] for i in range(2)]
+    return D[0][0] > 0 and det2(D) > 0 and (Z[0][0] + Z[1][1] > 0 or det2(Z) < 0)
 
 def check(r0, r1, p0, p1, depth=0):
     if certify_box(r0, r1, p0, p1):
@@ -118,14 +117,11 @@ def check(r0, r1, p0, p1, depth=0):
     return ok, bad
 
 if __name__ == "__main__":
-    # first-order coefficient: Y at rho = 0 (eigenvalues +-c up to the traceless check)
-    cone = []
-    for psi in [0.0, 0.7, 1.9, 4.0]:
-        Y, D = Ybox(arb(0), arb(psi))
-        tr = Y[0][0] + Y[1][1]; det = Y[0][0] * Y[1][1] - Y[0][1] * Y[1][0]
-        lam = (-det).sqrt()
-        print("psi=%.2f: trY(0)=%s  sqrt(-detY(0))=%s" % (psi, tr.mid(), lam.mid()))
-        cone.append(dict(psi=psi, tr_abs_upper=enc(abs(tr).upper()), eig_lower=enc(lam.lower()), eig_upper=enc(lam.upper())))
+    # Cyclic relabelling makes the slope independent of direction (cone theorem).
+    Y, D = Ybox(arb(0), arb(0))
+    assert det2(D) > 0 and det2(Y) < 0
+    slope = 3 * (-det2(Y) / det2(D)).sqrt()
+    print("First-order slope:", slope)
     gram = sum(M['G'][e][0][0] for e in range(3))
     rho1 = float(sys.argv[1]) if len(sys.argv) > 1 else 0.6
     nps = int(sys.argv[2]) if len(sys.argv) > 2 else 64
@@ -137,7 +133,8 @@ if __name__ == "__main__":
     print("rho1=%r: boxes verified=%d, failed=%d" % (rho1, tot_ok, tot_bad))
     json.dump(dict(rho1=rho1.hex(), psi_max=PSI_MAX.hex(), verified=tot_ok, failed=tot_bad,
                    eps_bdry_upper=enc(epsL.upper()), eps_grad_upper=enc(epsE.upper()),
-                   gram_lower=enc(gram.lower()), gram_upper=enc(gram.upper()), cone=cone,
+                   gram_lower=enc(gram.lower()), gram_upper=enc(gram.upper()),
+                   slope_lower=enc(slope.lower()), slope_upper=enc(slope.upper()),
                    leaves=[[x.hex() for x in L] for L in LEAVES]),
               open('../verification/local_leaves.json', 'w'))
     print("LOCAL:", "ALL PASS" if tot_bad == 0 else "FAIL")

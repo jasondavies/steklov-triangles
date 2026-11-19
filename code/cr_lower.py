@@ -1,5 +1,5 @@
 """
-RIGOROUS crude lower bound for sigma_3(E), E = equilateral triangle of side 1 (perimeter 3),
+Rigorous lower bound for sigma_4(E), E = equilateral triangle of side 1 (perimeter 3),
 via Crouzeix-Raviart (CR) finite elements and the Liu-type projection argument:
 
   sigma_k >= sigma_{h,k} / (1 + C_h^2 sigma_{h,k})        (k counts the zero eigenvalue as k=0)
@@ -13,7 +13,7 @@ Pi_h = CR interpolation (edge means).  Derivation of C_h (paper, Lemmas 3.1-3.2)
      ||w||_e^2 <= (|e|/|K|) h^2 (1/pi^2 + 1/pi) ||grad w||_K^2 = (4/sqrt3)(1/pi^2+1/pi) h ||grad w||_K^2.
   Corner elements carry two boundary edges, so C_h^2 = 2 (4/sqrt3)(1/pi^2+1/pi) h.
 
-Discrete part: we certify that S_h - mu B_h has at most 3 negative eigenvalues (=> sigma_{h,3} >= mu)
+Discrete part: we certify that S_h - mu B_h has exactly 4 negative eigenvalues (=> sigma_{h,4} >= mu)
 by a congruence C = O^T (S_h - mu B_h) O, evaluated in Arb, and Gershgorin discs (Sylvester's law of
 inertia; O is certified nonsingular by Gershgorin on O^T O).  The matrix O is COMMITTED certificate data
 (../data/cr_congruence.npz, exact binary64 entries, produced once by make_certificate.py), so this
@@ -111,13 +111,13 @@ if __name__ == "__main__":
     print("n_h=%d  dofs=%d  cells=%d  max boundary edges per cell=%d" % (m, n, ncells, nbmax))
     neg, pos, okO = certify(Sint, B3, m, mu, O)
     print("mu=%r: certified #neg discs=%d, #pos discs=%d (n=%d), O nonsingular=%s" % (mu, neg, pos, n, okO))
-    ok = okO and neg + pos == n and neg <= 3 and nbmax <= 2
+    ok = okO and neg + pos == n and neg == 4 and m >= 2 and nbmax <= 2
     Ch2 = 2 * (4 / arb(3).sqrt()) * (1 / arb.pi() ** 2 + 1 / arb.pi()) / m
     lb = arb(mu) / (1 + Ch2 * arb(mu))
-    print("=> sigma_{h,3} >= %r and sigma_3(E) >= mu/(1+C_h^2 mu) = %s   (C_h^2 = %s)" % (mu, lb, Ch2))
+    print("=> sigma_{h,4} >= %r and sigma_4(E) >= mu/(1+C_h^2 mu) = %s   (C_h^2 = %s)" % (mu, lb, Ch2))
     json.dump(dict(ok=bool(ok), n_h=m, dofs=n, mu=mu, neg=neg, pos=pos, O_nonsingular=bool(okO),
                    max_bdry_edges_per_cell=nbmax, Ch2_upper=enc(Ch2.upper()),
-                   sigma3_lower=enc(lb.lower())),
+                   sigma4_lower=enc(lb.lower())),
               open('../verification/cr_lower.json', 'w'), indent=1)
     print("CR LOWER:", "ALL PASS" if ok else "FAIL")
     sys.exit(0 if ok else 1)

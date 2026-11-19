@@ -96,25 +96,28 @@ For additional information on amsmath, use the `?' option.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd)
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
 
-LaTeX Warning: Citation `Weinstock' on page 1 undefined on input line 69.
+LaTeX Warning: Citation `Weinstock' on page 1 undefined on input line 73.
 
 
-LaTeX Warning: Citation `GP' on page 1 undefined on input line 70.
+LaTeX Warning: Citation `GP' on page 1 undefined on input line 74.
 
 
-LaTeX Warning: Citation `AimPL' on page 1 undefined on input line 73.
+LaTeX Warning: Citation `AimPL' on page 1 undefined on input line 77.
 
 
-LaTeX Warning: Citation `DNS' on page 1 undefined on input line 77.
+LaTeX Warning: Citation `DNS' on page 1 undefined on input line 81.
 
 
-LaTeX Warning: Citation `GLPS' on page 1 undefined on input line 80.
+LaTeX Warning: Citation `Nigam' on page 1 undefined on input line 83.
 
 
-LaTeX Warning: Citation `CGHLY' on page 1 undefined on input line 80.
+LaTeX Warning: Citation `GLPS' on page 1 undefined on input line 85.
 
 
-LaTeX Warning: Citation `DGMRV' on page 1 undefined on input line 83.
+LaTeX Warning: Citation `CGHLY' on page 1 undefined on input line 85.
+
+
+LaTeX Warning: Citation `DGMRV' on page 1 undefined on input line 88.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/shar
@@ -122,166 +125,180 @@ e/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
 m-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/f
 onts/enc/dvips/lm/lm-mathex.enc}]
 
-LaTeX Warning: Citation `LS' on page 2 undefined on input line 87.
+LaTeX Warning: Citation `LS' on page 2 undefined on input line 92.
 
 
-LaTeX Warning: Citation `CGHLY' on page 2 undefined on input line 102.
+LaTeX Warning: Citation `GP' on page 2 undefined on input line 114.
 
 
-LaTeX Warning: Reference `thm:main' on page 2 undefined on input line 112.
+LaTeX Warning: Reference `prop:eq' on page 2 undefined on input line 115.
 
 
-LaTeX Warning: Reference `eq:var' on page 2 undefined on input line 116.
+LaTeX Warning: Citation `CGHLY' on page 2 undefined on input line 115.
 
 
-LaTeX Warning: Reference `lem:param' on page 2 undefined on input line 118.
+LaTeX Warning: Reference `thm:main' on page 2 undefined on input line 125.
 
 
-LaTeX Warning: Reference `lem:XrhoY' on page 2 undefined on input line 122.
+LaTeX Warning: Reference `eq:var' on page 2 undefined on input line 129.
+
+
+LaTeX Warning: Reference `lem:param' on page 2 undefined on input line 131.
+
+
+LaTeX Warning: Reference `lem:XrhoY' on page 2 undefined on input line 135.
 
 [2]
 
-LaTeX Warning: Citation `DK' on page 3 undefined on input line 150.
+LaTeX Warning: Citation `DK' on page 3 undefined on input line 163.
 
 [3]
 
-LaTeX Warning: Reference `eq:var' on page 4 undefined on input line 199.
+LaTeX Warning: Reference `eq:var' on page 4 undefined on input line 212.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd)
 
-LaTeX Warning: Reference `lem:incl' on page 4 undefined on input line 222.
+LaTeX Warning: Reference `lem:incl' on page 4 undefined on input line 235.
 
 
-LaTeX Warning: Citation `CR' on page 4 undefined on input line 226.
+LaTeX Warning: Citation `CR' on page 4 undefined on input line 239.
 
 [4]
 
-LaTeX Warning: Citation `PW' on page 5 undefined on input line 245.
+LaTeX Warning: Citation `PW' on page 5 undefined on input line 258.
 
 
-LaTeX Warning: Citation `Beb' on page 5 undefined on input line 245.
+LaTeX Warning: Citation `Beb' on page 5 undefined on input line 258.
 
 
-LaTeX Warning: Citation `Liu' on page 5 undefined on input line 249.
+LaTeX Warning: Citation `Liu' on page 5 undefined on input line 262.
 
 
-LaTeX Warning: Citation `YXL' on page 5 undefined on input line 249.
+LaTeX Warning: Citation `YXL' on page 5 undefined on input line 262.
 
 
-LaTeX Warning: Reference `lem:trace' on page 5 undefined on input line 260.
-
-
-LaTeX Warning: Reference `lem:liu' on page 5 undefined on input line 291.
+LaTeX Warning: Reference `lem:trace' on page 5 undefined on input line 273.
 
 [5]
 
-LaTeX Warning: Reference `lem:enclosure' on page 6 undefined on input line 310.
+LaTeX Warning: Reference `lem:liu' on page 6 undefined on input line 305.
+
+
+LaTeX Warning: Reference `prop:cr' on page 6 undefined on input line 322.
+
+
+LaTeX Warning: Reference `lem:enclosure' on page 6 undefined on input line 323.
 
 
 
-LaTeX Warning: Reference `eq:transplant' on page 6 undefined on input line 338.
+LaTeX Warning: Reference `lem:enclosure' on page 6 undefined on input line 325.
 
-
-
-LaTeX Warning: Reference `eq:var' on page 6 undefined on input line 343.
-
-
-LaTeX Warning: Reference `rem:cone' on page 6 undefined on input line 348.
-
-
-LaTeX Warning: Reference `eq:exact' on page 6 undefined on input line 352.
 
 [6]
 
-LaTeX Warning: Reference `eq:exact' on page 7 undefined on input line 365.
+LaTeX Warning: Reference `eq:var' on page 7 undefined on input line 360.
 
 
-LaTeX Warning: Reference `eq:exact' on page 7 undefined on input line 370.
+LaTeX Warning: Reference `eq:exact' on page 7 undefined on input line 367.
 
 
-LaTeX Warning: Reference `lem:enclosure' on page 7 undefined on input line 386.
+LaTeX Warning: Reference `eq:exact' on page 7 undefined on input line 380.
+
+
+LaTeX Warning: Reference `eq:exact' on page 7 undefined on input line 385.
+
+
+LaTeX Warning: Reference `lem:enclosure' on page 7 undefined on input line 401.
 
 
 
-LaTeX Warning: Reference `prop:eq' on page 7 undefined on input line 387.
+LaTeX Warning: Reference `prop:eq' on page 7 undefined on input line 402.
 
 
-LaTeX Warning: Reference `lem:moments' on page 7 undefined on input line 403.
-
-
-LaTeX Warning: Reference `lem:crit' on page 7 undefined on input line 406.
+LaTeX Warning: Reference `lem:moments' on page 7 undefined on input line 420.
 
 [7]
 
-LaTeX Warning: Reference `eq:var' on page 8 undefined on input line 437.
+LaTeX Warning: Reference `lem:crit' on page 8 undefined on input line 424.
 
 
-LaTeX Warning: Reference `eq:var' on page 8 undefined on input line 441.
+LaTeX Warning: Reference `eq:transplant' on page 8 undefined on input line 440.
 
 
-LaTeX Warning: Reference `lem:cos' on page 8 undefined on input line 452.
 
-
-LaTeX Warning: Reference `lem:cos' on page 8 undefined on input line 453.
-
-
-LaTeX Warning: Reference `prop:eq' on page 8 undefined on input line 460.
-
-
-LaTeX Warning: Reference `thm:main' on page 8 undefined on input line 463.
-
-
-LaTeX Warning: Reference `lem:param' on page 8 undefined on input line 464.
-
-
-LaTeX Warning: Reference `prop:local' on page 8 undefined on input line 466.
-
-
-LaTeX Warning: Reference `prop:far' on page 8 undefined on input line 467.
-
-
-LaTeX Warning: Reference `prop:cr' on page 8 undefined on input line 467.
-
-
-LaTeX Warning: Reference `prop:eq' on page 8 undefined on input line 467.
-
-
-LaTeX Warning: Citation `Arb' on page 8 undefined on input line 472.
+LaTeX Warning: Reference `prop:eq' on page 8 undefined on input line 449.
 
 [8]
 
-LaTeX Warning: Reference `sec:local' on page 9 undefined on input line 494.
+LaTeX Warning: Reference `eq:var' on page 9 undefined on input line 506.
 
 
-LaTeX Warning: Reference `cor:area' on page 9 undefined on input line 511.
+LaTeX Warning: Reference `eq:var' on page 9 undefined on input line 510.
 
 
-LaTeX Warning: Reference `lem:XrhoY' on page 9 undefined on input line 512.
+LaTeX Warning: Reference `lem:cos' on page 9 undefined on input line 521.
 
 
-LaTeX Warning: Reference `lem:cos' on page 9 undefined on input line 513.
+LaTeX Warning: Reference `lem:cos' on page 9 undefined on input line 522.
 
 
-LaTeX Warning: Reference `tab:values' on page 9 undefined on input line 526.
+LaTeX Warning: Reference `thm:main' on page 9 undefined on input line 531.
+
+
+LaTeX Warning: Reference `lem:param' on page 9 undefined on input line 532.
+
+
+LaTeX Warning: Reference `prop:local' on page 9 undefined on input line 533.
+
+
+LaTeX Warning: Reference `prop:far' on page 9 undefined on input line 534.
+
+
+LaTeX Warning: Reference `prop:eq' on page 9 undefined on input line 538.
 
 [9]
 
-LaTeX Warning: Reference `tab:values' on page 10 undefined on input line 532.
+LaTeX Warning: Citation `HM' on page 10 undefined on input line 550.
 
 
-LaTeX Warning: Citation `CGHLY' on page 10 undefined on input line 571.
+LaTeX Warning: Citation `Arb' on page 10 undefined on input line 558.
 
 
-LaTeX Warning: Citation `DGMRV' on page 10 undefined on input line 583.
+LaTeX Warning: Reference `sec:local' on page 10 undefined on input line 580.
 
 [10]
 
-LaTeX Warning: Reference `eq:exact' on page 11 undefined on input line 589.
+LaTeX Warning: Reference `cor:area' on page 11 undefined on input line 597.
 
 
-LaTeX Warning: Reference `sec:cert' on page 11 undefined on input line 609.
+LaTeX Warning: Reference `lem:XrhoY' on page 11 undefined on input line 598.
 
-[11] [12] (./steklov-triangles.aux)
+
+LaTeX Warning: Reference `lem:cos' on page 11 undefined on input line 599.
+
+
+LaTeX Warning: Reference `tab:values' on page 11 undefined on input line 612.
+
+
+LaTeX Warning: Reference `tab:values' on page 11 undefined on input line 618.
+
+
+LaTeX Warning: Citation `CGHLY' on page 11 undefined on input line 657.
+
+
+LaTeX Warning: Reference `cor:thin' on page 11 undefined on input line 661.
+
+
+LaTeX Warning: Citation `DGMRV' on page 11 undefined on input line 666.
+
+[11]
+
+LaTeX Warning: Reference `lem:crit' on page 12 undefined on input line 671.
+
+
+LaTeX Warning: Reference `sec:cert' on page 12 undefined on input line 694.
+
+[12] [13] [14] (./steklov-triangles.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -308,7 +325,7 @@ public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share
 /fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10
 .pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on steklov-triangles.pdf (12 pages, 445369 bytes).
+Output written on steklov-triangles.pdf (14 pages, 455350 bytes).
 Transcript written on steklov-triangles.log.
 Latexmk: Getting log file 'steklov-triangles.log'
 Latexmk: Examining 'steklov-triangles.fls'
@@ -412,23 +429,23 @@ f/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.
 enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}]
 [2] [3] (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd) [4] [5]
-[6] [7] [8] [9] [10] [11] [12] (./steklov-triangles.aux) )</usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf/fonts/
-type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb><
-/usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1
-/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/
-share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/publi
-c/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/te
-xmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr
-17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts
-/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></us
-r/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/publ
-ic/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share
-/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/
-lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/
-fonts/type1/public/lm/lmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/symbols/msbm10.pfb>
-Output written on steklov-triangles.pdf (12 pages, 448002 bytes).
+[6] [7] [8] [9] [10] [11] [12] [13] [14] (./steklov-triangles.aux) )</usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/te
+xmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lm
+bx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.
+pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/t
+ype1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/pub
+lic/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr
+8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/
+type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb><
+/usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/
+public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/sh
+are/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on steklov-triangles.pdf (14 pages, 458176 bytes).
 Transcript written on steklov-triangles.log.
 Latexmk: Getting log file 'steklov-triangles.log'
 Latexmk: Examining 'steklov-triangles.fls'

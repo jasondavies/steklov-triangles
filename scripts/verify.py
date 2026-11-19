@@ -101,7 +101,9 @@ def g_cr():
     return [(d['ok'], 'inertia certificate valid, O nonsingular, <= 2 boundary edges per cell'),
             (d['n_h'] == int(CLAIMS['crNh']) and d['dofs'] == int(CLAIMS['crDofs']), 'n_h = %s, %s dofs' % (CLAIMS['crNh'], CLAIMS['crDofs'])),
             (Fr(d['mu']) == C('crMu') and d['neg'] == int(CLAIMS['crNeg']), 'exactly %s negative eigenvalues of S_h - %s B_h' % (CLAIMS['crNeg'], CLAIMS['crMu'])),
-            (X(d['sigma3_lower']) >= C('sigmaThreeLo'), 'sigma_3(E) >= %s' % CLAIMS['sigmaThreeLo']),
+            (d['pos'] == int(CLAIMS['crPos']), 'exactly %s positive eigenvalues' % CLAIMS['crPos']),
+            (X(d['sigma4_lower']) > C('sigmaFourLo') > 0 and C('sigmaFourLo') ** 2 > 12,
+             'sigma_4(E) > %s > 2 sqrt(3)' % CLAIMS['sigmaFourLo']),
             (near(X(d['Ch2_upper']), 'crChSq', '5e-7'), 'C_h^2 = %s...' % CLAIMS['crChSq'])]
 
 
@@ -115,12 +117,9 @@ def g_local():
             (X(d['eps_grad_upper']) <= C('epsGradMax'), 'eps_grad <= %s' % CLAIMS['epsGradMax'])]
     glo, ghi = X(d['gram_lower']), X(d['gram_upper'])
     msgs.append((near(glo, 'gramE', '5e-7') and near(ghi, 'gramE', '5e-7'), 'Gram of u_1 = %s' % CLAIMS['gramE']))
-    for c in d['cone']:
-        lo, hi = X(c['eig_lower']), X(c['eig_upper'])
-        msgs.append((X(c['tr_abs_upper']) <= Fr(1, 10 ** 10) and near(lo, 'coneEig', '5e-7') and near(hi, 'coneEig', '5e-7'),
-                     'Y(0): trace within 1e-10 of 0, eigenvalues +-%s (psi=%s)' % (CLAIMS['coneEig'], c['psi'])))
-        msgs.append((near(3 * lo / ghi, 'coneSlope', '5e-6') and near(3 * hi / glo, 'coneSlope', '5e-6'),
-                     'cone coefficient 3*eig/gram = %s (psi=%s)' % (CLAIMS['coneSlope'], c['psi'])))
+    lo, hi = X(d['slope_lower']), X(d['slope_upper'])
+    msgs.append((0 < C('coneLo') < lo <= hi < C('coneHi'),
+                 'first-order splitting constant lies strictly between %s and %s' % (CLAIMS['coneLo'], CLAIMS['coneHi'])))
     return msgs
 
 
@@ -131,7 +130,7 @@ def g_far():
             (H(d['rho1']) == Fr(float(CLAIMS['rhoOne'])), 'same rho1 as the local region'),
             (m <= C('farBound'), 'far-region maximum <= %s' % CLAIMS['farBound']),
             (near(m, 'farMax', '5e-5'), 'far-region maximum = %s (4 decimals)' % CLAIMS['farMax']),
-            (C('farBound') < C('SigmaElo'), 'far bound < lower bound of Sigma(E)')]
+            (C('SigmaElo') - C('farBound') > Fr(1, 2), 'far-region deficit exceeds 1/2')]
 
 
 def g_coverage():

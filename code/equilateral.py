@@ -1,5 +1,5 @@
 """
-Paper, Section 3.1 and Prop. 3.5: certified enclosure of sigma_1 of the equilateral triangle E
+Paper, Section 3.1 and Prop. 3.4: certified enclosure of sigma_1 of the equilateral triangle E
 (side 1, perimeter 3).  Reads ONLY the committed certificate ../data/equilateral_pair.json
 (coefficients c_k as exact binary64 numbers); no floating-point linear algebra is used.
 
@@ -8,7 +8,7 @@ Paper, Section 3.1 and Prop. 3.5: certified enclosure of sigma_1 of the equilate
 2. sigma~ = the Rayleigh quotient of u1 (ball arithmetic), rounded to binary64 (deterministic).
 3. eta = max over span(u1,u2) of ||d_n f - sigma~ f|| / ||f||  (L2(dE)), from exact 2x2 Gram matrices.
 By the inclusion lemma, >= 2 eigenvalues of the DtN map lie in [sigma~ - eta, sigma~ + eta]; with
-sigma_3(E) > sigma~ + eta (cr_lower.py) these are sigma_1 = sigma_2.
+sigma_3(E) = 2 sqrt(3) > sigma~ + eta (cubic and CR isolation) these are sigma_1 = sigma_2.
 Output (machine readable, exact 'man*2^exp' encodings): ../verification/equilateral.json
 """
 import json, sys

@@ -9,24 +9,27 @@ perimeter and at fixed area. The proof is computer-assisted.
 
 Write Σ(T) = σ₁(T)·L(T), where L is the perimeter.
 
-- **Theorem 1.1.** For every triangle T, Σ(T) ≤ Σ(E), with equality only for equilateral T. Also
-  σ₁(E) = σ₂(E) < σ₃(E), and 3.8724615957722 ≤ Σ(E) ≤ 3.8724615957734.
+- **Theorem 1.1.** For every triangle T, Σ(T) ≤ Σ(E), with equality only for equilateral T, and
+  3.8724615957722 ≤ Σ(E) ≤ 3.8724615957734.
 - **Corollary 1.2 (fixed area).** σ₁(T)·√|T| ≤ σ₁(E)·√|E| ∈ [0.8494076787253, 0.8494076787257], with
   equality only for equilateral T.
-- **Numerical observations** (not rigorous, except where marked certified):
-  - a table of Σ for seven triangles and the regular 4-, 5- and 6-gons. Each entry gives a certified Arb
-    upper bound and a high-precision estimate with an estimated error;
-  - near E, Σ ≈ Σ(E) − 3.533ρ, so the maximum is a cone;
-  - for thin triangles, Σ ≈ 2q·θ(p);
-  - σ₃(E) agrees with 2√3 to 14 digits. 2√3 is an eigenvalue with an explicit eigenfunction, but equality
-    σ₃(E) = 2√3 is not proved.
+- **Quantitative stability.** Normalise a longest side to a unit base and let ρ be the distance of
+  the apex from the equilateral apex. The deficit Σ(E) − Σ(T) is at least ρ/2, hence at least
+  (ℓmax − ℓmin)/(2ℓmax). A deficit of 0.01 or less forces ℓmin/ℓmax ≥ 0.98.
+- **Equilateral spectrum.** For side length one, the cubic eigenfunction spans the eigenspace of
+  σ₃(E) = 2√3, and σ₄(E) > 3.5617858371486.
+- **Splitting of the first pair.** Displacing the apex by ρ over a fixed unit base gives first-order
+  changes −cρ and +cρ in σ₁L and σ₂L, with uniform O(ρ²) remainders and
+  3.5332113353 < c < 3.5332113355.
+- **Thin triangles.** For each fixed apex abscissa 0 < p < 1 and height q tending to zero,
+  Σ(T) = 2qθ(p) + o(q), by the thin-domain lemma of Henrot and Michetti.
 
 Cheng–Gui–Hu–Li–Yao (arXiv:2603.25116v2, 2026) record the conjecture as open for every N ≥ 3. We found no
 earlier proof of the triangle case.
 
 ## Read
 
-- [Manuscript](paper/steklov-triangles.pdf) and its [LaTeX source](paper/steklov-triangles.tex), 11 pages.
+- [Manuscript](paper/steklov-triangles.pdf) and its [LaTeX source](paper/steklov-triangles.tex).
 - [code/README.md](code/README.md): the scripts.
 - [lean/README.md](lean/README.md): the Lean development.
 
@@ -63,8 +66,7 @@ MATHLIB_PACKAGES=/path/to/.lake/packages .venv/bin/python scripts/verify.py   # 
 - `table_estimates.json`: the high-precision table data and its trial functions.
 
 The certified steps read only this data, so their output does not depend on the BLAS library or the CPU.
-Runs with `OPENBLAS_CORETYPE=Sandybridge` and `=Haswell` produce identical certificates. Two optional
-scripts regenerate the data; neither is run by `verify.py`:
+Two optional scripts regenerate the data; neither is run by `verify.py`:
 - `code/make_certificate.py` for the first two files;
 - `code/hp_table.py` for the table data, which is slow.
 
@@ -74,24 +76,26 @@ scripts regenerate the data; neither is run by `verify.py`:
 - the reduction to the parameter domain;
 - the inclusion and eigenvector-enclosure lemmas for the Dirichlet-to-Neumann map;
 - the Crouzeix–Raviart trace constant and projection bound;
-- the D₃/Schur multiplicity argument;
+- the cubic boundary condition, spectral counting and D₃ multiplicity argument;
 - the affine transplantation and the factorisation X = ρY;
 - the description of the far region and the cos(πx) bound;
-- the fixed-area corollary.
+- the uniform first-order splitting via the cluster projection and cyclic relabelling;
+- the stability and fixed-area inequalities.
 
 The cited inputs are:
 - the Payne–Weinberger inequality;
 - standard facts about the Dirichlet-to-Neumann map;
-- Gershgorin's theorem and Sylvester's law of inertia.
+- Gershgorin's theorem and Sylvester's law of inertia;
+- Henrot and Michetti’s Lemma 3.2 for the fixed-profile thin limit.
 
 **Certified in Arb ball arithmetic** (python-flint, `code/`):
 - **Σ(E).** A harmonic-polynomial pair with relative residual η ≤ 1.96·10⁻¹³ gives the enclosure of Σ(E)
   (`equilateral.py`).
-- **σ₃(E) ≥ 2.2003.** Crouzeix–Raviart elements with 408 dofs and an inertia certificate
+- **σ₄(E) > 3.5617858371486.** Crouzeix–Raviart elements with 900 dofs and an inertia certificate
   (`cr_lower.py`).
-- **Local region, ρ ≤ 0.6.** 460 boxes in (ρ,ψ) (`local.py`). They are re-checked, and their exact tiling
-  of the disc is verified, by `coverage_check.py`.
-- **Far region, ρ ≥ 0.6.** 16 intervals in p, with largest bound 3.114 < 3.8725 (`far_region.py`).
+- **Local region, ρ ≤ ρ₁.** 907 boxes in (ρ,ψ) (`local.py`). They are re-checked, and their exact tiling
+  of the parameter rectangle is verified, by `coverage_check.py`. Both regions use the nearest binary64 value to 0.6 for ρ₁.
+- **Far region, ρ ≥ ρ₁.** 16 intervals in p, with upper bound 3.114382798607 (`far_region.py`).
 - **Table of Section 7.** A rigorous upper bound for Σ of each listed polygon, from a fixed trial
   function on the exact polygon (`table_bounds.py`). The estimated values themselves are numerical.
 
@@ -101,8 +105,7 @@ The cited inputs are:
 - the algebra of X = ρY;
 - the closed-form integrals of cos(πx).
 
-**Numerical only.** The Ritz maps and special values, the cone slope, the thin-triangle asymptotics, and
-σ₃(E) ≈ 2√3. These checks also confirm that every certified bound lies above the converged Ritz value.
+**Numerical only.** The Ritz maps, estimated table errors, and sampled values of the one-dimensional thin-profile eigenvalue.
 
 **Main residual risks.** The by-hand derivations of the Crouzeix–Raviart constant and of the closed forms,
 their transcription into code, and the correctness of python-flint/Arb. No independent human review has
@@ -111,7 +114,7 @@ been recorded.
 ## Authorship and AI disclosure
 
 Author: Jason Davies. The mathematics, code, Lean development and manuscript were produced by AI systems
-(Anthropic's Claude) under the author's direction. The author has not checked the arguments; see the
+(Anthropic’s Claude and OpenAI Codex) under the author's direction. The author has not checked the arguments; see the
 declaration in the paper.
 
 ## License

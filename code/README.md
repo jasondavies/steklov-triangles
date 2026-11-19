@@ -17,9 +17,9 @@ this data. It is optional and is not run by `verify.py`.
 | Script | What it certifies | Paper |
 |---|---|---|
 | `rig.py` | Library: exact polynomial line integrals along edges; Green-formula energy moments; edge Gram matrices and means; residual Gram matrices | §3, §4 |
-| `equilateral.py` | Reads the coefficients c_k and builds the exactly D₃-equivariant harmonic pair (degree 20). Certifies the relative residual η ≤ 1.9559e-13 and the enclosures of Σ(E) and σ₁√\|E\|. Writes `equilateral.json` | §3.1, Prop. 3.5 |
-| `cr_lower.py` | Crouzeix–Raviart mesh (n_h = 16) and inertia of S_h − 3B_h, with exactly 3 negative eigenvalues, using the committed congruence matrix. Gives σ₃(E) ≥ 2.2003. Writes `cr_lower.json` | Lemmas 3.1–3.2, Prop. 3.3 |
-| `local.py [rho1] [nψ]` | Moment enclosures of the exact eigenspace and the box covering of [0, ρ₁] × [0, 6.3]; writes `local_leaves.json` | Lemmas 4.1–4.3, Prop. 4.4 |
+| `equilateral.py` | Reads the coefficients c_k and builds the exactly D₃-equivariant harmonic pair (degree 20). Certifies the relative residual η ≤ 1.9559e-13 and the enclosures of Σ(E) and σ₁√\|E\|. Writes `equilateral.json` | §3.1, Prop. 3.4 |
+| `cr_lower.py` | Crouzeix–Raviart mesh (n_h = 24) and inertia of S_h − 5B_h, with 4 negative and 896 positive eigenvalues, using the committed congruence matrix. Gives σ₄(E) > 3.5617858371486. Writes `cr_lower.json` | Lemmas 3.1–3.2, Prop. 3.3 |
+| `local.py [rho1] [nψ]` | Exact eigenspace moment enclosures, the splitting coefficient and the stronger test on 907 boxes for the linear deficit. Writes `local_leaves.json` | Lemmas 4.1–4.3, Prop. 4.4, Thm. 4.5 |
 | `coverage_check.py` | The local boxes tile [0, ρ₁] × [0, 6.3] (exact area sum, disjoint interiors) and are re-certified; ρ₁ is the same double as in `far_region.py` | Prop. 4.4 |
 | `far_region.py` | One-dimensional bound for the cos(πx) trial function on 16 p-intervals covering the far region | Lemma 5.1, Prop. 5.2 |
 

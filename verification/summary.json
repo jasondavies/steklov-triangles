@@ -1,5 +1,5 @@
 {
- "time_utc": "2026-11-19T00:08:04Z",
+ "time_utc": "2026-11-19T00:41:58Z",
  "only": null,
  "skip_numerics": false,
  "python": "3.12.3",
@@ -13,7 +13,7 @@
   {
    "name": "equilateral",
    "ok": true,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "cmd": [
     "python",
     "equilateral.py"
@@ -48,7 +48,7 @@
   {
    "name": "cr_lower",
    "ok": true,
-   "seconds": 0.9,
+   "seconds": 11.3,
    "cmd": [
     "python",
     "cr_lower.py"
@@ -60,19 +60,23 @@
     },
     {
      "ok": true,
-     "check": "n_h = 16, 408 dofs"
+     "check": "n_h = 24, 900 dofs"
     },
     {
      "ok": true,
-     "check": "exactly 3 negative eigenvalues of S_h - 3 B_h"
+     "check": "exactly 4 negative eigenvalues of S_h - 5 B_h"
     },
     {
      "ok": true,
-     "check": "sigma_3(E) >= 2.2003"
+     "check": "exactly 896 positive eigenvalues"
     },
     {
      "ok": true,
-     "check": "C_h^2 = 0.121137..."
+     "check": "sigma_4(E) > 3.5617858371486 > 2 sqrt(3)"
+    },
+    {
+     "ok": true,
+     "check": "C_h^2 = 0.080758..."
     }
    ]
   },
@@ -93,7 +97,7 @@
     },
     {
      "ok": true,
-     "check": "460 local boxes"
+     "check": "907 local boxes"
     },
     {
      "ok": true,
@@ -105,11 +109,11 @@
     },
     {
      "ok": true,
-     "check": "eps_bdry <= 2.71e-13"
+     "check": "eps_bdry <= 1.14e-13"
     },
     {
      "ok": true,
-     "check": "eps_grad <= 4.01e-13"
+     "check": "eps_grad <= 2.11e-13"
     },
     {
      "ok": true,
@@ -117,35 +121,7 @@
     },
     {
      "ok": true,
-     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=0.0)"
-    },
-    {
-     "ok": true,
-     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=0.0)"
-    },
-    {
-     "ok": true,
-     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=0.7)"
-    },
-    {
-     "ok": true,
-     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=0.7)"
-    },
-    {
-     "ok": true,
-     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=1.9)"
-    },
-    {
-     "ok": true,
-     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=1.9)"
-    },
-    {
-     "ok": true,
-     "check": "Y(0): trace within 1e-10 of 0, eigenvalues +-1.857812 (psi=4.0)"
-    },
-    {
-     "ok": true,
-     "check": "cone coefficient 3*eig/gram = 3.53321 (psi=4.0)"
+     "check": "first-order splitting constant lies strictly between 3.5332113353 and 3.5332113355"
     }
    ]
   },
@@ -172,7 +148,7 @@
     },
     {
      "ok": true,
-     "check": "far-region maximum <= 3.12"
+     "check": "far-region maximum <= 3.114382798607"
     },
     {
      "ok": true,
@@ -180,7 +156,7 @@
     },
     {
      "ok": true,
-     "check": "far bound < lower bound of Sigma(E)"
+     "check": "far-region deficit exceeds 1/2"
     }
    ]
   },
@@ -199,7 +175,7 @@
     },
     {
      "ok": true,
-     "check": "all 460 local boxes re-certified"
+     "check": "all 907 local boxes re-certified"
     },
     {
      "ok": true,
@@ -210,7 +186,7 @@
   {
    "name": "test_moments",
    "ok": true,
-   "seconds": 0.2,
+   "seconds": 0.3,
    "cmd": [
     "python",
     "test_moments.py"
@@ -225,7 +201,7 @@
   {
    "name": "test_independent",
    "ok": true,
-   "seconds": 0.3,
+   "seconds": 0.7,
    "cmd": [
     "python",
     "test_independent.py"
@@ -240,7 +216,7 @@
   {
    "name": "check_local_vs_ritz",
    "ok": true,
-   "seconds": 0.3,
+   "seconds": 0.6,
    "cmd": [
     "python",
     "check_local_vs_ritz.py"
@@ -255,7 +231,7 @@
   {
    "name": "table_bounds",
    "ok": true,
-   "seconds": 0.2,
+   "seconds": 0.4,
    "cmd": [
     "python",
     "table_bounds.py"
@@ -426,7 +402,7 @@
   {
    "name": "numerics_extra",
    "ok": true,
-   "seconds": 18.1,
+   "seconds": 35.2,
    "cmd": [
     "python",
     "numerics_extra.py"
@@ -457,7 +433,7 @@
   {
    "name": "map_sigma",
    "ok": true,
-   "seconds": 0.8,
+   "seconds": 2.0,
    "cmd": [
     "python",
     "map_sigma.py"
@@ -492,7 +468,7 @@
   {
    "name": "paper",
    "ok": true,
-   "seconds": 0.6,
+   "seconds": 1.9,
    "cmd": [
     "latexmk",
     "-pdf",
@@ -511,7 +487,7 @@
   {
    "name": "lean",
    "ok": true,
-   "seconds": 23.6,
+   "seconds": 31.8,
    "cmd": [
     "bash",
     "scripts/build_with_lean_path.sh"
@@ -535,25 +511,25 @@
  ],
  "inputs_sha256": {
   "CITATION.cff": "305f56e414c1d72ab68675d86a7304b68c57eb8cbf5ce0e0470d632c39c9fcd9",
-  "README.md": "be92c2aaec26a362fe050968fec297b90db14133a6f877126ed9426a5c49286a",
-  "claims.json": "f72d1f031927a8dbf7587a7efcb3a2a0193634e26756e73b38bc129679e8ec29",
-  "code/README.md": "d1ae9c6219c497485cbaeb7cd817f850ba0dc58c6386b8ab7474df7fc0ce24dc",
+  "README.md": "15264dc68b7c1a946b15d7fdfe7836e2dbd236a70b84ca452480d26de6c8b4ff",
+  "claims.json": "06c64624dd1d5e373dd0f60ae90e527f39bc6394c5bc1f5e8db3e8ae6a33bd37",
+  "code/README.md": "219db287bf222650ede5305cac946c8e7248339c9c00b5adf8c8d88ddba7e611",
   "code/check_local_vs_ritz.py": "05091936116c6af3ccc16d61c4f631f9a8b641b1b563572a1fe9727b449a27d7",
-  "code/coverage_check.py": "d49960fd7785cbc7ba8fdb452cc9b8be7ec97bd0883860fcd93156c6126a969f",
-  "code/cr_lower.py": "d9c5b98cbf68e2011b5878d1a2428a98ba14a93e24c5d89a8632978a1940c76c",
-  "code/equilateral.py": "795a45799df45f6c0100d62514a8d2a0bee25f2e7438cf77b710ece86fde2164",
+  "code/coverage_check.py": "553ff79ec474194a6be489b653ee9021bac46992297c1a0bd99734e57c84aff7",
+  "code/cr_lower.py": "94dd6c4220f3523804c8ff7773862122c7f9638019c66b4a4f831d34f4810059",
+  "code/equilateral.py": "5bd4fe953b416cde65210ce51560faefe3cae67fb4c60f9c203241b5b06fc7b9",
   "code/far_region.py": "bc9e72bacde7aa165528b1c8f349113edb4cbc097d11c058e3fa91a08c4cfb51",
   "code/hp_table.py": "453fb2130035c195a4a72cba26f8cb96a32bfb0e432bbc35ff6ca2e8eea5aff9",
   "code/hritz.py": "19080bbfb1538ccafd6ab68cc60c37c20dc8a8012629a15697cdcda46c7900b7",
-  "code/local.py": "ef8067725d5e0d0997354d4fe27d7e60c7b3310940ee56b19c8c6e0804f3ac4a",
-  "code/make_certificate.py": "6c510f7788658696393e4c208b4728c28880ff662230003da2baf017764d32b7",
+  "code/local.py": "bf2568a02d47b061d536343de9e2df0691522f1bac6a705c8f320ed2235ec824",
+  "code/make_certificate.py": "482c3c69bea154a373543066548849a33768a06f85ba15944c6466f38d4250c5",
   "code/map_sigma.py": "f68b42d64f4531c4492ac4c61ef31931f6a01f51a912c90793c33bda1ba2ebef",
   "code/numerics_extra.py": "7f891ff9014774ff39303d477f55a37e6d49d73dc7158e4dec4fc0d4af7eb879",
   "code/rig.py": "e9739757b8fe647bebcfc05d797f0c2585ee171aea73b2bb64b72b89bb03849d",
   "code/table_bounds.py": "81e4cb6dda2aa71cbfca3898c283e87d47b5fd29bdc26f47b8248b60dcbb7a69",
   "code/test_independent.py": "28d7819711c228a595ea5c5a7894d365b905156e344439ed67e0dfe3677dc85f",
   "code/test_moments.py": "4172cbf21557c52a1461c29fab5aa446e601da0e01761f5a1795ae3ac90cc859",
-  "data/cr_congruence.npz": "46ff3e3c5ea0a965d48bdab42854325f2cef0e348996f1ea22f174805f632f15",
+  "data/cr_congruence.npz": "eb8318ec4c1672eaa6940e6fcfb7be78f44d846c8dccef4b0e7642feb9de1c14",
   "data/equilateral_pair.json": "34538ff437a93a77d584a8daad7bf2713dfa950aba4514d38f59f28e4bdd4d8c",
   "data/table_estimates.json": "70d1feb8967a7da15129da4c83c706008e1019ff13403b28172e3ce8ecf6e8cd",
   "lean/README.md": "0bcda59ca34376d96350edaeee4644c28347e340ec013a9ad7ef4c2eb0a5d6f6",
@@ -564,12 +540,12 @@
   "lean/lakefile.toml": "9beb3495e482a038a65b32b687680da0a873230062d0bb63133651fe9257c6d9",
   "lean/scripts/build_with_lean_path.sh": "2a797dce930952fa41709027bbf55fb2d57815883c4c0f97c68951f22d7ad7ea",
   "lean/scripts/print_axioms.lean": "14e86a773ad0d1c75945b8397ce53b3dfb6ae7c816cf88494453ad1d953673bf",
-  "paper/claims.tex": "faeb3be716fe7c59d8a61686ef46d4d6b39cb1af057578cd609dc4534ba6e402",
-  "paper/steklov-triangles.tex": "8705b8a4bf831bd839cf7190b671060d3d2f901455b3fe62126b0a9d09345c18",
+  "paper/claims.tex": "d8bd27641550b590eaaeab0cf24b4e8dfbfe4db9ec7249920d6e424101341397",
+  "paper/steklov-triangles.tex": "395df4f13238992fc403f6fbba3aeacc3c62dfa571bbae78e56de71a268ca765",
   "requirements.txt": "f8161f59ef65164615c3fc60ccb0d922ff97927dc23bbe4317f65995f98d6751",
   "scripts/make_claims_tex.py": "cfec4a11db7dd07ea41c109c67c656f36f7502fd1a82be7ebd74e99fea67d78c",
-  "scripts/verify.py": "f9e48b60d1444193fb5cf313cfe8d3ac4055a278b46e916e6358dbb09a0526dc"
+  "scripts/verify.py": "b75302ce1bc99f67c1944fccef1dbcd26e293e40fc471564ef0f173b1cafac56"
  },
- "pdf_sha256": "5320bc76a07d39b7b15013177f0bc23797d08f50b454432b13466dedb254a3cc",
+ "pdf_sha256": "b97a43fc04412796ad1654307ebf306a57cce5245ec63cb2a243dfc2c10ff2d4",
  "overall": "PASS"
 }
