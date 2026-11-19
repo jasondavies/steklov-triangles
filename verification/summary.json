@@ -1,5 +1,5 @@
 {
- "time_utc": "2026-11-19T00:58:48Z",
+ "time_utc": "2026-11-19T01:09:56Z",
  "only": null,
  "skip_numerics": false,
  "python": "3.12.3",
@@ -13,7 +13,7 @@
   {
    "name": "equilateral",
    "ok": true,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "cmd": [
     "python",
     "equilateral.py"
@@ -48,7 +48,7 @@
   {
    "name": "cr_lower",
    "ok": true,
-   "seconds": 6.0,
+   "seconds": 12.3,
    "cmd": [
     "python",
     "cr_lower.py"
@@ -163,7 +163,7 @@
   {
    "name": "coverage_check",
    "ok": true,
-   "seconds": 0.2,
+   "seconds": 0.3,
    "cmd": [
     "python",
     "coverage_check.py"
@@ -186,7 +186,7 @@
   {
    "name": "test_moments",
    "ok": true,
-   "seconds": 0.2,
+   "seconds": 0.4,
    "cmd": [
     "python",
     "test_moments.py"
@@ -201,7 +201,7 @@
   {
    "name": "test_independent",
    "ok": true,
-   "seconds": 0.3,
+   "seconds": 0.5,
    "cmd": [
     "python",
     "test_independent.py"
@@ -216,7 +216,7 @@
   {
    "name": "check_local_vs_ritz",
    "ok": true,
-   "seconds": 0.3,
+   "seconds": 0.6,
    "cmd": [
     "python",
     "check_local_vs_ritz.py"
@@ -402,7 +402,7 @@
   {
    "name": "numerics_extra",
    "ok": true,
-   "seconds": 22.0,
+   "seconds": 40.4,
    "cmd": [
     "python",
     "numerics_extra.py"
@@ -433,7 +433,7 @@
   {
    "name": "map_sigma",
    "ok": true,
-   "seconds": 1.4,
+   "seconds": 1.2,
    "cmd": [
     "python",
     "map_sigma.py"
@@ -448,7 +448,7 @@
   {
    "name": "claims_tex",
    "ok": true,
-   "seconds": 0.0,
+   "seconds": 0.1,
    "cmd": [
     "python",
     "scripts/make_claims_tex.py",
@@ -468,7 +468,7 @@
   {
    "name": "paper",
    "ok": true,
-   "seconds": 1.4,
+   "seconds": 1.2,
    "cmd": [
     "latexmk",
     "-pdf",
@@ -487,7 +487,7 @@
   {
    "name": "lean",
    "ok": true,
-   "seconds": 28.0,
+   "seconds": 45.1,
    "cmd": [
     "bash",
     "scripts/build_with_lean_path.sh"
@@ -541,11 +541,11 @@
   "lean/scripts/build_with_lean_path.sh": "2a797dce930952fa41709027bbf55fb2d57815883c4c0f97c68951f22d7ad7ea",
   "lean/scripts/print_axioms.lean": "14e86a773ad0d1c75945b8397ce53b3dfb6ae7c816cf88494453ad1d953673bf",
   "paper/claims.tex": "d8bd27641550b590eaaeab0cf24b4e8dfbfe4db9ec7249920d6e424101341397",
-  "paper/steklov-triangles.tex": "395df4f13238992fc403f6fbba3aeacc3c62dfa571bbae78e56de71a268ca765",
+  "paper/steklov-triangles.tex": "1f009a82410c485985c21bef5f01be4283ae2561ca2238b0cc3d57b518d31cc7",
   "requirements.txt": "f8161f59ef65164615c3fc60ccb0d922ff97927dc23bbe4317f65995f98d6751",
   "scripts/make_claims_tex.py": "cfec4a11db7dd07ea41c109c67c656f36f7502fd1a82be7ebd74e99fea67d78c",
   "scripts/verify.py": "905f1c25a50a6ac7b613b0813b91351bd00496e72c3194c245bfea4a262e38bf"
  },
- "pdf_sha256": "b97a43fc04412796ad1654307ebf306a57cce5245ec63cb2a243dfc2c10ff2d4",
+ "pdf_sha256": "575d5c1eb24b4ad884f0e6143c994ac1dd8ae983c5ace91773a99a79941cbf34",
  "overall": "PASS"
 }
