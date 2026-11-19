@@ -167,8 +167,8 @@ def g_table():
         msgs.append((est - max(err, Fr(1, 10 ** 18)) <= up, '%s: estimate (minus its error) <= certified upper bound' % row['name']))
         msgs.append((r['retained_rank'] == r['basis_size'] and Fr(r['min_gram_eig']) > Fr(10) ** (20 - r['dps']),
                      '%s: all %d directions retained; variance Gram well conditioned at %d digits' % (row['name'], r['basis_size'], r['dps'])))
-        msgs.append((abs(est - pest) + err <= perr,
-                     '%s: printed %s +- %s contains the estimate +- its estimated error' % (row['name'], row['estimate'], row['error'])))
+        msgs.append((abs(est - pest) + 2 * err <= perr,
+                     '%s: printed %s +- %s covers rounding and twice the largest error indicator' % (row['name'], row['estimate'], row['error'])))
     return msgs
 
 

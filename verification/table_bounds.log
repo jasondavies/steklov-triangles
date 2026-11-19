@@ -14,40 +14,40 @@ TABLE BOUNDS: done (10 polygons)
 [gate] ok   60-60-60: certified upper bound <= printed 3.8724615957729
 [gate] ok   60-60-60: estimate (minus its error) <= certified upper bound
 [gate] ok   60-60-60: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   60-60-60: printed 3.8724615957728 +- 1e-13 contains the estimate +- its estimated error
+[gate] ok   60-60-60: printed 3.8724615957728 +- 1e-13 covers rounding and twice the largest error indicator
 [gate] ok   50-50-80: certified upper bound <= printed 2.8777309857377
 [gate] ok   50-50-80: estimate (minus its error) <= certified upper bound
 [gate] ok   50-50-80: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   50-50-80: printed 2.87773098574 +- 3e-11 contains the estimate +- its estimated error
+[gate] ok   50-50-80: printed 2.87773098574 +- 3e-11 covers rounding and twice the largest error indicator
 [gate] ok   70-70-40: certified upper bound <= printed 2.5730765728918
 [gate] ok   70-70-40: estimate (minus its error) <= certified upper bound
 [gate] ok   70-70-40: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   70-70-40: printed 2.573076572892 +- 2e-12 contains the estimate +- its estimated error
+[gate] ok   70-70-40: printed 2.573076572892 +- 2e-12 covers rounding and twice the largest error indicator
 [gate] ok   40-60-80: certified upper bound <= printed 2.5350358150935
 [gate] ok   40-60-80: estimate (minus its error) <= certified upper bound
 [gate] ok   40-60-80: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   40-60-80: printed 2.53503581509 +- 2e-11 contains the estimate +- its estimated error
+[gate] ok   40-60-80: printed 2.53503581509 +- 2e-11 covers rounding and twice the largest error indicator
 [gate] ok   45-45-90: certified upper bound <= printed 2.4960723700476
 [gate] ok   45-45-90: estimate (minus its error) <= certified upper bound
 [gate] ok   45-45-90: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   45-45-90: printed 2.4960723700475 +- 1e-13 contains the estimate +- its estimated error
+[gate] ok   45-45-90: printed 2.4960723700475 +- 1e-13 covers rounding and twice the largest error indicator
 [gate] ok   30-60-90: certified upper bound <= printed 1.9013817577256
 [gate] ok   30-60-90: estimate (minus its error) <= certified upper bound
 [gate] ok   30-60-90: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   30-60-90: printed 1.9013817577255 +- 1e-13 contains the estimate +- its estimated error
+[gate] ok   30-60-90: printed 1.9013817577255 +- 1e-13 covers rounding and twice the largest error indicator
 [gate] ok   30-30-120: certified upper bound <= printed 1.5603440800120
 [gate] ok   30-30-120: estimate (minus its error) <= certified upper bound
 [gate] ok   30-30-120: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   30-30-120: printed 1.5603441 +- 3e-7 contains the estimate +- its estimated error
+[gate] ok   30-30-120: printed 1.5603441 +- 3e-7 covers rounding and twice the largest error indicator
 [gate] ok   regular 4-gon: certified upper bound <= printed 5.5060219386902
 [gate] ok   regular 4-gon: estimate (minus its error) <= certified upper bound
 [gate] ok   regular 4-gon: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   regular 4-gon: printed 5.5060219386901 +- 1e-13 contains the estimate +- its estimated error
+[gate] ok   regular 4-gon: printed 5.5060219386901 +- 1e-13 covers rounding and twice the largest error indicator
 [gate] ok   regular 5-gon: certified upper bound <= printed 5.9774725550439
 [gate] ok   regular 5-gon: estimate (minus its error) <= certified upper bound
 [gate] ok   regular 5-gon: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   regular 5-gon: printed 5.9774726 +- 4e-7 contains the estimate +- its estimated error
+[gate] ok   regular 5-gon: printed 5.9774726 +- 4e-7 covers rounding and twice the largest error indicator
 [gate] ok   regular 6-gon: certified upper bound <= printed 6.1355701455936
 [gate] ok   regular 6-gon: estimate (minus its error) <= certified upper bound
 [gate] ok   regular 6-gon: all 100 directions retained; variance Gram well conditioned at 80 digits
-[gate] ok   regular 6-gon: printed 6.135570 +- 5e-6 contains the estimate +- its estimated error
+[gate] ok   regular 6-gon: printed 6.135570 +- 5e-6 covers rounding and twice the largest error indicator

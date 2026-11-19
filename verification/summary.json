@@ -1,5 +1,5 @@
 {
- "time_utc": "2026-11-19T00:41:58Z",
+ "time_utc": "2026-11-19T00:58:48Z",
  "only": null,
  "skip_numerics": false,
  "python": "3.12.3",
@@ -13,7 +13,7 @@
   {
    "name": "equilateral",
    "ok": true,
-   "seconds": 0.2,
+   "seconds": 0.1,
    "cmd": [
     "python",
     "equilateral.py"
@@ -48,7 +48,7 @@
   {
    "name": "cr_lower",
    "ok": true,
-   "seconds": 11.3,
+   "seconds": 6.0,
    "cmd": [
     "python",
     "cr_lower.py"
@@ -163,7 +163,7 @@
   {
    "name": "coverage_check",
    "ok": true,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "cmd": [
     "python",
     "coverage_check.py"
@@ -186,7 +186,7 @@
   {
    "name": "test_moments",
    "ok": true,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "cmd": [
     "python",
     "test_moments.py"
@@ -201,7 +201,7 @@
   {
    "name": "test_independent",
    "ok": true,
-   "seconds": 0.7,
+   "seconds": 0.3,
    "cmd": [
     "python",
     "test_independent.py"
@@ -216,7 +216,7 @@
   {
    "name": "check_local_vs_ritz",
    "ok": true,
-   "seconds": 0.6,
+   "seconds": 0.3,
    "cmd": [
     "python",
     "check_local_vs_ritz.py"
@@ -231,7 +231,7 @@
   {
    "name": "table_bounds",
    "ok": true,
-   "seconds": 0.4,
+   "seconds": 0.2,
    "cmd": [
     "python",
     "table_bounds.py"
@@ -251,7 +251,7 @@
     },
     {
      "ok": true,
-     "check": "60-60-60: printed 3.8724615957728 +- 1e-13 contains the estimate +- its estimated error"
+     "check": "60-60-60: printed 3.8724615957728 +- 1e-13 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -267,7 +267,7 @@
     },
     {
      "ok": true,
-     "check": "50-50-80: printed 2.87773098574 +- 3e-11 contains the estimate +- its estimated error"
+     "check": "50-50-80: printed 2.87773098574 +- 3e-11 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -283,7 +283,7 @@
     },
     {
      "ok": true,
-     "check": "70-70-40: printed 2.573076572892 +- 2e-12 contains the estimate +- its estimated error"
+     "check": "70-70-40: printed 2.573076572892 +- 2e-12 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -299,7 +299,7 @@
     },
     {
      "ok": true,
-     "check": "40-60-80: printed 2.53503581509 +- 2e-11 contains the estimate +- its estimated error"
+     "check": "40-60-80: printed 2.53503581509 +- 2e-11 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -315,7 +315,7 @@
     },
     {
      "ok": true,
-     "check": "45-45-90: printed 2.4960723700475 +- 1e-13 contains the estimate +- its estimated error"
+     "check": "45-45-90: printed 2.4960723700475 +- 1e-13 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -331,7 +331,7 @@
     },
     {
      "ok": true,
-     "check": "30-60-90: printed 1.9013817577255 +- 1e-13 contains the estimate +- its estimated error"
+     "check": "30-60-90: printed 1.9013817577255 +- 1e-13 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -347,7 +347,7 @@
     },
     {
      "ok": true,
-     "check": "30-30-120: printed 1.5603441 +- 3e-7 contains the estimate +- its estimated error"
+     "check": "30-30-120: printed 1.5603441 +- 3e-7 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -363,7 +363,7 @@
     },
     {
      "ok": true,
-     "check": "regular 4-gon: printed 5.5060219386901 +- 1e-13 contains the estimate +- its estimated error"
+     "check": "regular 4-gon: printed 5.5060219386901 +- 1e-13 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -379,7 +379,7 @@
     },
     {
      "ok": true,
-     "check": "regular 5-gon: printed 5.9774726 +- 4e-7 contains the estimate +- its estimated error"
+     "check": "regular 5-gon: printed 5.9774726 +- 4e-7 covers rounding and twice the largest error indicator"
     },
     {
      "ok": true,
@@ -395,14 +395,14 @@
     },
     {
      "ok": true,
-     "check": "regular 6-gon: printed 6.135570 +- 5e-6 contains the estimate +- its estimated error"
+     "check": "regular 6-gon: printed 6.135570 +- 5e-6 covers rounding and twice the largest error indicator"
     }
    ]
   },
   {
    "name": "numerics_extra",
    "ok": true,
-   "seconds": 35.2,
+   "seconds": 22.0,
    "cmd": [
     "python",
     "numerics_extra.py"
@@ -433,7 +433,7 @@
   {
    "name": "map_sigma",
    "ok": true,
-   "seconds": 2.0,
+   "seconds": 1.4,
    "cmd": [
     "python",
     "map_sigma.py"
@@ -468,7 +468,7 @@
   {
    "name": "paper",
    "ok": true,
-   "seconds": 1.9,
+   "seconds": 1.4,
    "cmd": [
     "latexmk",
     "-pdf",
@@ -487,7 +487,7 @@
   {
    "name": "lean",
    "ok": true,
-   "seconds": 31.8,
+   "seconds": 28.0,
    "cmd": [
     "bash",
     "scripts/build_with_lean_path.sh"
@@ -544,7 +544,7 @@
   "paper/steklov-triangles.tex": "395df4f13238992fc403f6fbba3aeacc3c62dfa571bbae78e56de71a268ca765",
   "requirements.txt": "f8161f59ef65164615c3fc60ccb0d922ff97927dc23bbe4317f65995f98d6751",
   "scripts/make_claims_tex.py": "cfec4a11db7dd07ea41c109c67c656f36f7502fd1a82be7ebd74e99fea67d78c",
-  "scripts/verify.py": "b75302ce1bc99f67c1944fccef1dbcd26e293e40fc471564ef0f173b1cafac56"
+  "scripts/verify.py": "905f1c25a50a6ac7b613b0813b91351bd00496e72c3194c245bfea4a262e38bf"
  },
  "pdf_sha256": "b97a43fc04412796ad1654307ebf306a57cce5245ec63cb2a243dfc2c10ff2d4",
  "overall": "PASS"
